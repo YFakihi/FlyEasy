@@ -2,7 +2,6 @@
  
 </section> --}}
 
-@section('content')
 <div class="grid max-w-screen-xl pb-8 pt-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 ml-4">
     <div class="mr-auto place-self-center lg:col-span-7 ">
         <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-4xl dark:text-white">Morocco FastTrack : Your Painless Passport to Travel Bliss</h1>
@@ -19,4 +18,3 @@
         <img src="{{ asset('images/reserve.png') }}" alt="reserve.png">
     </div>                
 </div>
-@endsection

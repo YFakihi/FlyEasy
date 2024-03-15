@@ -1,5 +1,7 @@
 <?php
 
+// app/Http/Controllers/AuthController.php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
@@ -9,52 +11,60 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 
 class AuthController extends Controller
 {
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function index()
     {
         return view('auth.register');
     }
+
     public function loginForm()
     {
         return view('auth.login');
     }
 
-
     public function login(LoginRequest $request)
     {
-       $form = $request->validated();
+        $form = $request->validated();
+        $user = $this->userRepository->findByEmail($form['email']);
 
-       if(Auth::attempt($form)){
-        $request->session()->regenerate();
-        return redirect('/');
-       }
-       return back()->onlyInput('email');
+        if ($user && Hash::check($form['password'], $user->password)) {
+            Auth::login($user);
+            $request->session()->regenerate();
+            return redirect('/');
+        }
+
+        return back()->onlyInput('email');
     }
-
 
     public function register(RegisterRequest $request)
     {
         $form = $request->validated();
         $form['password'] = Hash::make($form['password']);
-        $user = User::create($form);
-        auth()->login($user);
+        $user = $this->userRepository->create($form);
+
+        Auth::login($user);
         return redirect('login');
     }
-    
-    
 
     public function logout(Request $request)
     {
-      auth()->logout();
-      $request->session()->invalidate();
-      $request->session()->regenerateToken();
-      return redirect('/');
+        auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
-
 
     public function showForgotPasswordForm()
     {
@@ -100,5 +110,4 @@ class AuthController extends Controller
             ? redirect()->route('login')->with('status', __($status))
             : back()->withErrors(['email' => [__($status)]]);
     }
-  
 }

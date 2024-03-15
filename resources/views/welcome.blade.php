@@ -6,5 +6,9 @@
 @section('title', 'Home')
 
 @section('content')
-    @include('layouts.hero')
+   <x-hero  />
+   <x-offers/>
+   <x-footer/>
 @endsection
+
+

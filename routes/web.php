@@ -30,6 +30,10 @@ Route::get('home', function () {
     return view('dashboard/home');
 })->name('home');
 
+Route::get('airports', function () {
+    return view('dashboard/airports');
+})->name('airports');
+
 
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::get('/register', [AuthController::class, 'index'])->name('register');

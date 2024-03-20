@@ -55,7 +55,7 @@ class AuthController extends Controller
         $user = $this->userRepository->create($form);
 
         Auth::login($user);
-        return redirect('login');
+        return redirect('/');
     }
 
     public function logout(Request $request)

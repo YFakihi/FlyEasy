@@ -25,16 +25,19 @@ Route::get('about', function () {
     return view('pages/about');
 })->name('about');
 
+
+Route::get('home', function () {
+    return view('dashboard/home');
+})->name('home');
+
+
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::get('/register', [AuthController::class, 'index'])->name('register');
-
 
 Route::post('/register', [AuthController::class, 'register'])->name('newregister');
 Route::post('/login', [AuthController::class, 'login'])->name('newlogin');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard', function () { return view('dashboard'); });
-
-
 
 Route::get('/forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('password.request');
 Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');

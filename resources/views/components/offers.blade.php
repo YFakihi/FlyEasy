@@ -1,5 +1,6 @@
  <section class="flex items-center justify-center mt-10 pb-10">
     <div class="p-4 sm:px-10 flex flex-col justify-center items-center text-base h-100vh mx-auto" id="pricing">
+        <p class="text-1xl font-semibold text-center flex gap-2 justify-center mb-10">Le service Fast Track est le meilleur moyen de rendre votre passage dans les aéroports marocains plus agréable et principalement plus rapide. L’attente sans fin aux services d’immigration et aux douanes est maintenant terminée. Réservez et payez en ligne pour éviter les files d’attente, pour avoir un support complet par nos agents et pour gagner du temps.</p>
         <h3 class="text-5xl font-semibold text-center flex gap-2 justify-center mb-10">Nos offres</h3>
         <div class="isolate mx-auto grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             <div class="ring-1 ring-gray-200 rounded-3xl p-8 xl:p-10">

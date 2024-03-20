@@ -5,7 +5,10 @@
 
 @section('title', 'Home')
 
+
+
 @section('content')
+
    <x-hero  />
    <x-offers/>
    <x-footer/>

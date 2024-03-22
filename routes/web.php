@@ -1,4 +1,5 @@
 <?php 
+use App\Http\Controllers\AirportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgotPasswordController;
@@ -20,19 +21,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::get('about', function () {
     return view('pages/about');
 })->name('about');
-
 
 Route::get('home', function () {
     return view('dashboard/home');
 })->name('home');
 
-Route::get('airports', function () {
-    return view('dashboard/airports');
-})->name('airports');
+Route::get('/airports', [AirportController::class,'index'])->name('airports');
+Route::post('/airports', [AirportController::class,'store'])->name('add_airports');
+Route::delete('/delete/{id}', [AirportController::class,'delete'])->name('airports.delete');
+
+Route::post('/cervices', [AirportController::class,'store'])->name('add_cervices');
+
+
+
+
+
+// Route::get('airports', function () {
+//     return view('dashboard/airports');
+// })->name('airports');
 
 
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');

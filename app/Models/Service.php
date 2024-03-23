@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
+    protected $table = 'fast_track_services';
+
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+    ];
 }

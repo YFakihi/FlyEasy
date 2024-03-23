@@ -55,6 +55,8 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-4 py-4"> name</th>
+                            <th scope="col" class="px-4 py-4"> description</th>
+                            <th scope="col" class="px-4 py-4"> price</th>
                         
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
@@ -65,6 +67,8 @@
                         @foreach ($services as $service)
                         <tr class="border-b dark:border-gray-700">
                             <td class="px-4 py-3">{{$service->name}}</td>
+                            <td class="px-4 py-3">{{$service->description}}</td>
+                            <td class="px-4 py-3">{{$service->price}}</td>
                             <td class="px-4 py-3 flex items-center justify-end">
                                 <button id="{{ $service->name }}-dropdown-button"
                                     data-dropdown-toggle="{{ $service->name }}-dropdown"
@@ -200,12 +204,23 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form action="{{route('add_services')}}" method="POST">
+                <form action="{{route('add_services')}}" method="POST">
+
                 @csrf
                 <div class="grid gap-4 mb-4 sm:grid-cols-2">
                     <div>
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                         <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type service name" required="">
+                    </div>
+
+                    <div>
+                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description	</label>
+                        <input type="text" name="description" id="description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type service name" required="">
+                    </div>
+
+                    <div>
+                        <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                        <input type="text" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type service name" required="">
                     </div>
     
                 </div>

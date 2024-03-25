@@ -22,6 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('about', function () {
     return view('pages/about');
 })->name('about');
@@ -29,6 +30,11 @@ Route::get('about', function () {
 Route::get('home', function () {
     return view('dashboard/home');
 })->name('home');
+
+Route::get('booking', function () {
+    return view('pages/booking');
+})->name('booking');
+
 
 Route::get('/airports', [AirportController::class,'index'])->name('airports');
 Route::post('/airports', [AirportController::class,'store'])->name('add_airports');

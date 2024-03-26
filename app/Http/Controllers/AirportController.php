@@ -23,10 +23,24 @@ class AirportController extends Controller
 
     public function delete($id)
     {
+
         $airport = Airport::findOrFail($id);
         $airport->delete();
     
-        return redirect()->back()->with(['message' => 'Airport deleted successfully']);
+        session()->flash('success', "{$airport->name} deleted successfully");
+        return response()->json(['success' => true, 'message' => "airport deleted successfully"]);    }
+
+    public function update(Request $request ,$id){
+        $validatedata = $request->validate([
+            'name'=> 'required|string|max:234'
+        ]);
+    
+         $airport = Airport::find($id);
+         $airport->update([
+            'name'=> $request->input('name')
+         ]);
+         return redirect()->back()->with('success','airport bien modifier!!');
+
     }
     
     

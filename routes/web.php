@@ -36,9 +36,11 @@ Route::get('booking', function () {
 })->name('booking');
 
 
+
 Route::get('/airports', [AirportController::class,'index'])->name('airports');
 Route::post('/airports', [AirportController::class,'store'])->name('add_airports');
 Route::delete('/delete/{id}', [AirportController::class,'delete'])->name('airports.delete');
+Route::put('/update/{id}', [AirportController::class,'update'])->name('airports.update');
 
 Route::get('/service', [ServiceController::class,'index'])->name('showservices');
 Route::post('/services', [ServiceController::class,'store'])->name('add_services');
@@ -48,9 +50,6 @@ Route::delete('/remove/{id}',[ServiceController::class, 'destroy'])->name('servi
 
 
 
-// Route::get('airports', function () {
-//     return view('dashboard/airports');
-// })->name('airports');
 
 
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');

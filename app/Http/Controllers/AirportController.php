@@ -40,7 +40,6 @@ class AirportController extends Controller
             'name'=> $request->input('name')
          ]);
          return redirect()->back()->with('success','airport bien modifier!!');
-
     }
     
     

@@ -151,7 +151,7 @@
                                         </button>
                                     </div>
                                     <!-- Modal body -->
-                                    <form action="{{ route('airports.update', $service->id) }}" method="POST">
+                                    <form action="{{ route('service.update', $service->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <div class="grid gap-4 mb-4 sm:grid-cols-2">
@@ -159,6 +159,17 @@
                                                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                                                 <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Name" value="{{ $service->name }}" required="">
                                             </div>
+
+                                            <div>
+                                                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">description</label>
+                                                <input type="text" name="description" id="description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="description" value="{{ $service->description }}" required="">
+                                            </div>
+
+                                            <div>
+                                                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">price</label>
+                                                <input type="text" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="price" value="{{ $service->price }}" required="">
+                                            </div>
+                                            
                                         </div>
 
                                         <button type="submit" class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">

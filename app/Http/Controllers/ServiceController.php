@@ -23,6 +23,15 @@ class ServiceController extends Controller
         return redirect()->back()->with('success','service bien ajouter!!');
     }
 
+    public function update(Request $request, $id){
+        $validatedata = $request->validate([
+            'name'=>'required|string|max:234',
+            'description'=>'required|string|max:734',
+            'price'=>'required',
+        ]);
+
+    }
+
     public function destroy($id){
         $service = Service::findOrFail($id);
 

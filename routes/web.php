@@ -1,5 +1,6 @@
 <?php 
 use App\Http\Controllers\AirportController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -47,6 +48,12 @@ Route::get('/service', [ServiceController::class,'index'])->name('showservices')
 Route::post('/services', [ServiceController::class,'store'])->name('add_services');
 Route::delete('/remove/{id}',[ServiceController::class, 'destroy'])->name('services.delete');
 Route::put('/update/{id}', [ServiceController::class,'update'])->name('service.update');
+
+
+
+Route::get('/booking',[BookingController::class,'index'])->name('booking');
+
+Route::post('/booking/reserve', [BookingController::class, 'create'])->name('booking/create');
 
 
 

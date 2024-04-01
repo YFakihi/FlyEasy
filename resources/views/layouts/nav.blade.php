@@ -5,6 +5,7 @@
   <section class='py-2 bg-[#1d294f] text-white text-center px-10'>
     <p class='text-sm'>Summer sale: Save up to 40%</p>
   </section>
+
 {{-- <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
   <div class="px-4 py-3">
     <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
@@ -30,6 +31,7 @@
       <img src="{{asset("images/logo.png")}}" class="h-10" /> 
     </a>
   <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+
     @guest
     <a type="button" href="{{route('login')}}" class="text-white mr-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</a>
 
@@ -65,6 +67,13 @@
         <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
       </li>
     </ul>
+ 
+    <a href="">
+         <svg class="w-6 h-6 text-gray-800 ml-72 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+         </svg>
+     </a>
+    
   </div>
   </div>
 </nav>

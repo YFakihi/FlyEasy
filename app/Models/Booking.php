@@ -22,4 +22,17 @@ class Booking extends Model
         'airport_id',
         'status',
     ];
+
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }  
+    
+    public function airport(){
+        return $this->belongsTo(Airport::class);
+    }
+
+    public function service(){
+        return $this->belongsTo(Service::class);
+    }
 }

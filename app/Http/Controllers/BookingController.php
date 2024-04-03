@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Airport;
 use App\Models\Booking;
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -18,6 +19,14 @@ class BookingController extends Controller
         $airports = Airport::all();
         $services = Service::all();
         return view('pages.booking',compact('booking','airports','services'));
+    }
+
+    public function display(){
+        $booking = Booking::all();
+        $user = User::all();
+        $airport = Airport::all();
+       
+        return view('dashboard.booking',compact('booking','user','airport'));
     }
 
     /**

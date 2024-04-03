@@ -55,6 +55,8 @@ Route::get('/booking',[BookingController::class,'index'])->name('booking');
 
 Route::post('/booking/reserve', [BookingController::class, 'create'])->name('booking/create');
 
+Route::get('/reservation',[BookingController::class,'display'])->name('bookingTable');
+
 
 
 

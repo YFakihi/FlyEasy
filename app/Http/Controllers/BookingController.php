@@ -32,63 +32,28 @@ class BookingController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
-    {
-        // dd($request);
-        
-        $validatedData =  $request->validate([
-            'airport_id' => 'required|exists:airports,id',
-            'fast_track_service_id' => 'required|exists:fast_track_services,id',
-            'date' => 'required|date',
-            'time' => 'required|date_format:H:i',
-            'service_type' => 'required|in:arrival_fast_track,departure_fast_track',
-            // 'service_type' => 'required|in:departure_fast_track,arrival_fast_track',
-            'number_of_adults' => 'required|integer|min:1',
-            'number_of_children' => 'required|integer|min:0',
-        ]);
 
-        // dd($validatedData['service_type']);
+     public function create(Request $request)
+{
+   
+    $validatedData = $request->validate([
+        'airport_id' => 'required|exists:airports,id',
+        'date' => 'required|date',
+        'time' => 'required',
+        'service_type' => 'required|in:arrival_fast_track,departure_fast_track',
+        'number_of_adults' => 'required|integer|min:1',
+        'number_of_children' => 'required|integer|min:0',
+    ]);
 
-        
-            $booking = new Booking();
+    // Add the authenticated user's ID to the request data
+    $validatedData['user_id'] = auth()->id();
 
-            $booking->airport_id = $validatedData['airport_id'];
-            // $booking->user_id = 1;   
-            $booking->user_id = auth()->user()->id; 
-            $booking->fast_track_service_id = $validatedData['fast_track_service_id'];
-            $booking->date = $validatedData['date'];
-            $booking->time = $validatedData['time'];
-            $booking->service_type = $validatedData['service_type'];
-            $booking->number_of_adults = $validatedData['number_of_adults'];
-            $booking->number_of_children = $validatedData['number_of_children'];
-    
-            // Set default status
-            $booking->status = 'pending';
-    
-            // Save the booking
-            $booking->save();
-            // // $booking->user_id = auth()->user()->id; 
-            // $booking->airport_id = $request->airport_id;
-            // $booking->fast_track_service_id = $request->fast_track_service_id;
-            // $booking->date = $request->date;
-            // $booking->time = $request->time;
-            // $booking->status = 'pending';   
-            // $booking->user_id = 1;   
-            // // $booking->airport_id = 43;   
-            // $booking->service_type = '';
-            // $booking->number_of_adults = $request->number_of_adults;
-            // $booking->number_of_children = $request->number_of_children;
-            // $booking->save();
+    // Create a new booking using the validated data
+    $booking = Booking::create($validatedData);
 
-            
-    
-          
-            return redirect()->back()->with('success','service bien ajouter!!');
-    
-    }
-  
-    
-  
+    // Redirect or respond as needed
+    return redirect()->back()->with('success', 'Booking created successfully.');
+}
     /**
      * Store a newly created resource in storage.
      */

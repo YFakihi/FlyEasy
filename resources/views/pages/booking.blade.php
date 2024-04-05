@@ -7,6 +7,12 @@
   <div class="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-md">
       <div class="px-6 py-4">
           <h2 class="text-2xl font-semibold text-gray-800 mb-2">Book a Ride</h2>
+          @if($message = Session::get('success'))
+          <div class=" alert text-color:blue">
+            {{$message}}
+          </div>
+
+          @endif
           <form action="{{ route('booking/create') }}" method="POST" class="md:flex md:flex-wrap">
             @csrf
             <div class="w-full mb-4">
@@ -38,6 +44,7 @@
                 <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
+            
         
             <!-- Add similar styling for other inputs here -->
         

@@ -1,6 +1,7 @@
 <?php 
 use App\Http\Controllers\AirportController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -58,6 +59,9 @@ Route::post('/booking/reserve', [BookingController::class, 'create'])->name('boo
 Route::get('/reservation',[BookingController::class,'display'])->name('bookingTable');
 
 
+//cart
+Route::get('add/to/cart/',[CartController::class,'index'])->name('cart');
+Route::get('remove/booking/{id}', [CartController::class, 'remove'])->name('remove_cart');
 
 
 

@@ -11,8 +11,7 @@ class Booking extends Model
 
     protected $table = 'booking';
     protected $fillable = [
-        'airport_id',
-        'fast_track_service_id',
+        // 'fast_track_service_id',
         'date',
         'time',
         'service_type',
@@ -20,7 +19,7 @@ class Booking extends Model
         'number_of_children',
         'user_id',
         'airport_id',
-        'status',
+        'payment',
     ];
 
 
@@ -34,5 +33,9 @@ class Booking extends Model
 
     public function service(){
         return $this->belongsTo(Service::class);
+    }
+
+    public function card(){
+        return $this->belongsTo(Cart::class);
     }
 }

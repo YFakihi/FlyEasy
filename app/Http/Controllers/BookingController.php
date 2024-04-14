@@ -13,12 +13,13 @@ class BookingController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
+        $airports = Airport::with('services')->get();
         $booking = Booking::all();
-        $airports = Airport::all();
-        $services = Service::all();
-        return view('pages.booking',compact('booking','airports','services'));
+    
+        return view('pages.booking', compact('booking', 'airports'));
     }
 
     public function display(){

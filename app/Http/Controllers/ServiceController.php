@@ -2,26 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Airport;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
     public function index(){
-        $services = Service::all();
-        return view('dashboard.services', compact('services'));
+        $servises = Service::all();
+       
+        $airports = Airport::all();
+        return view('dashboard.services', compact('servises','airports'));
     }
 
+   
     public function store(Request $request){
-        $validatedata = $request->validate([
+        $validatedData = $request->validate([
             'name'=>'required|string|max:245',
             'description'=>'required|string|max:545',
             'price'=>'required',
+            'airport_id'=>'required',
         ]);
-
-        Service::create($validatedata);
+    
+        $service = new Service;
+        $service->name = $request->name;
+        $service->description = $request->description;
+        $service->price = $request->price;
+        $service->save();
+        
+        foreach ($request->airport_id as $airport_id) {
+            $service->airports()->attach($airport_id);
+        }   
+    
         return redirect()->back()->with('success','service bien ajouter!!');
     }
+
+
 
     public function update(Request $request, $id){
         $validatedata = $request->validate([
@@ -29,6 +45,16 @@ class ServiceController extends Controller
             'description'=>'required|string|max:734',
             'price'=>'required',
         ]);
+
+        $service = Service::find($id);
+        $service->update([
+            'name'=>$request->input('name'),
+            'description'=>$request->input('description'),
+            'price'=>$request->input('price')
+        ]);
+    
+
+         return redirect()->back()->with('success','sercice bien modifier!!');
 
     }
 

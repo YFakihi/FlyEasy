@@ -21,4 +21,9 @@ class Airport extends Model
     public function booking(){
         return $this->belongsTo(Booking::class);
     }
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'airport_service');
+    }
 }

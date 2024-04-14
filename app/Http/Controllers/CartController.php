@@ -23,19 +23,19 @@ class CartController extends Controller
     }
 
 
-    // public function remove($id)
-    // {
-    //     // Find the booking in the user's bookings
-    //     $booking = auth()->user()->booking()->findOrFail($id);
+    public function remove($id)
+    {
+        // Find the booking in the user's bookings
+        $booking = auth()->user()->booking()->findOrFail($id);
         
-    //     // Delete the booking from the database
-    //     $booking->delete();
+        // Delete the booking from the database
+        $booking->delete();
         
-    //     // Optionally, update any relevant totals or quantities
+        // Optionally, update any relevant totals or quantities
         
-    //     // Redirect back or return a response indicating success
-    //     return redirect()->back()->with('success', 'Booking removed successfully');
-    // }
+        // Redirect back or return a response indicating success
+        return redirect()->back()->with('success', 'Booking removed successfully');
+    }
     
 
     /**

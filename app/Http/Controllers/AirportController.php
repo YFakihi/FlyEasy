@@ -21,6 +21,12 @@ class AirportController extends Controller
        return redirect()->back()->with('success','airport bien ajouter!!');
     }
 
+
+    public function getServices($id)
+    {
+        $airport = Airport::with('services')->find($id);
+        return response()->json($airport->services);
+    }
     public function delete($id)
     {
         $airport = Airport::findOrFail($id);

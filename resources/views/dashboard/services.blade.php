@@ -57,6 +57,7 @@
                             <th scope="col" class="px-4 py-4"> name</th>
                             <th scope="col" class="px-4 py-4"> description</th>
                             <th scope="col" class="px-4 py-4"> price</th>
+                            <th scope="col" class="px-4 py-4"> AirPorts</th>
                         
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
@@ -64,11 +65,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($services as $service)
+                        @foreach ($servises as $service)
                         <tr class="border-b dark:border-gray-700">
                             <td class="px-4 py-3">{{$service->name}}</td>
                             <td class="px-4 py-3">{{$service->description}}</td>
                             <td class="px-4 py-3">{{$service->price}}</td>
+                            <td class="px-4 py-3">{{ $service->airport ? $service->airport->name : 'N/A' }}</td>                       
                             <td class="px-4 py-3 flex items-center justify-end">
                                 <button id="{{ $service->name }}-dropdown-button"
                                     data-dropdown-toggle="{{ $service->name }}-dropdown"
@@ -86,25 +88,25 @@
                                         aria-labelledby="{{ $service->name }}-dropdown-button">
                                         <li>
                                             <button type="button"
-                                            data-modal-target="updateairportModal{{ $service->id }}"
-                                            data-modal-toggle="updateairportModal{{ $service->id }}"
-                                            class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
-                                            {{-- <svg class="w-4 h-4 mr-2"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 20 20" fill="currentColor"
-                                                aria-hidden="true">
-                                                <path
-                                                    d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
-                                            </svg> --}}
-                                            Edit
-                                        </button>
+                                                data-modal-target="updateairportModal{{ $service->id }}"
+                                                data-modal-toggle="updateairportModal{{ $service->id }}"
+                                                class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
+                                                {{-- <svg class="w-4 h-4 mr-2"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20" fill="currentColor"
+                                                    aria-hidden="true">
+                                                    <path
+                                                        d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
+                                                </svg> --}}
+                                                Edit
+                                            </button>
                                         </li>
                                         <li>
                                             <button type="button"
-                                                data-modal-target="readProductModal"
-                                                data-modal-toggle="readProductModal"
+                                                data-modal-target="readairportModal"
+                                                data-modal-toggle="readairportModal"
                                                 class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
                                                 {{-- <svg class="w-4 h-4 mr-2"
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -118,15 +120,17 @@
                                             </button>
                                         </li>
                                         <li>
+                                            
                                             <a id="deleteButton" data-modal-target="deleteModal"
                                             
                                             data-modal-toggle="deleteModal" data-record-id="1"
                                             data-record-id="{{ $service->id }}"
-                                            data-action="{{ route('services.delete', $service->id) }}"
+                                            data-action="{{ route('airports.delete', $service->id) }}"
                                             class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                             
                                           Delete
                                           </a>
+                                          
                                         </li>
                                     </ul>
                                 </div>
@@ -169,6 +173,8 @@
                                                 <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">price</label>
                                                 <input type="text" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="price" value="{{ $service->price }}" required="">
                                             </div>
+
+
                                             
                                         </div>
 
@@ -176,7 +182,7 @@
                                             <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                                             </svg>
-                                            Update airport
+                                            Update service
                                         </button>
                                     </form>
                                 </div>
@@ -233,7 +239,7 @@
 
 </section>    
 
-<!-- End block -->
+
 <!-- Create modal -->
 <div id="createserviceModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-2xl max-h-full">
@@ -267,6 +273,17 @@
                     <div>
                         <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
                         <input type="text" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type service name" required="">
+                    </div>
+
+                                                                                        
+                    <div class="w-full mb-4">
+                        <label for="airport" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Airports</label>
+                        <select id="airport" name="airport_id[]" class="bg-gray-0 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" multiple>
+                            <option disabled>Select airports</option>
+                            @foreach ($airports as $airport)
+                                <option value="{{ $airport->id }}">{{ $airport->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
     
                 </div>
@@ -317,8 +334,8 @@
                 <a id="deleteButton" data-modal-target="deleteModal"
                                             
                 data-modal-toggle="deleteModal" data-record-id="1"
-                data-record-id="{{ $service->id }}"
-                data-action="{{ route('services.delete', $service->id) }}"
+                {{-- data-record-id="{{ $service->id }}"
+                data-action="{{ route('services.delete', $service->id) }}" --}}
                 class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                 
               Delete

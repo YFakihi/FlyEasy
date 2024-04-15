@@ -17,8 +17,8 @@
                 <h3 class="text-xl font-extrabold text-[#333] mb-6">{{$reservation->user->name}}</h3>
                 <div>   
                   <h6 class="text-md text-gray-500">Airport: <strong class="ml-2">{{$reservation->airport->name}}</strong></h6>
-                  {{-- {{ dd($reservation->service) }} --}}
-                  <h6 class="text-md text-gray-500 mt-2">Prix: <strong class="ml-2">{{ $reservation->service ? $reservation->service->price : 'N/A' }}</strong></h6>             <h6 class="text-md text-gray-500 mt-2">Date: <strong class="ml-2">{{$reservation->date}}</strong></h6>
+                  {{ dd($reservation->service_id) }}
+                  <h6 class="text-md text-gray-500 mt-2">Prix: <strong class="ml-2">{{ $reservation->service ? $reservation->service->price : 'N/A' }}</strong></h6>
                   <h6 class="text-md text-gray-500 mt-2">Time:<strong class="ml-2">{{$reservation->time}}</strong></h6>
                 </div>
                 <div class="mt-6 flex flex-wrap gap-6">

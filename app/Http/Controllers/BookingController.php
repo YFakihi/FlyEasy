@@ -44,6 +44,7 @@ class BookingController extends Controller
         'service_type' => 'required|in:arrival_fast_track,departure_fast_track',
         'number_of_adults' => 'required|integer|min:1',
         'number_of_children' => 'required|integer|min:0',
+        'service_id' => 'required|exists:services,id',
     ]);
 
     // Add the authenticated user's ID to the request data

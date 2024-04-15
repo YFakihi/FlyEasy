@@ -19,6 +19,7 @@ class Booking extends Model
         'number_of_children',
         'user_id',
         'airport_id',
+        'service_id',
         'payment',
     ];
 

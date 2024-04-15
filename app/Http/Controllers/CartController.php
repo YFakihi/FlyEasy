@@ -17,6 +17,8 @@ class CartController extends Controller
     {
         $user = auth()->user();
         $booking = $user->booking()->with('service')->get();
+        dd($booking);
+      
         $airports = Airport::all(); 
         $services = Service::all();
         

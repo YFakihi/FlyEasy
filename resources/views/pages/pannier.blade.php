@@ -9,15 +9,16 @@
                        @foreach ($booking as $reservation)
         <div class="flex items-start max-sm:flex-col gap-8 py-6">
           <div class="h-52 shrink-0">
-            <img src='https://readymadeui.com/images/product3.webp' class="w-full h-full object-contain rounded-md" />
+            <img src='{{asset('images/fast_track_vip_cmn.jpg')}}' class="w-full h-full object-contain rounded-md" />
           </div>
           <div class="flex items-start gap-6 max-md:flex-col w-full">
             <div class="overflow-y-auto max-h-[400px]">
               <div>
                 <h3 class="text-xl font-extrabold text-[#333] mb-6">{{$reservation->user->name}}</h3>
                 <div>   
-                  <h6 class="text-md text-gray-500">Size: <strong class="ml-2">{{$reservation->airport->name}}</strong></h6>
-                  <h6 class="text-md text-gray-500 mt-2">Date: <strong class="ml-2">{{$reservation->date}}</strong></h6>
+                  <h6 class="text-md text-gray-500">Airport: <strong class="ml-2">{{$reservation->airport->name}}</strong></h6>
+                  {{-- {{ dd($reservation->service) }} --}}
+                  <h6 class="text-md text-gray-500 mt-2">Prix: <strong class="ml-2">{{ $reservation->service ? $reservation->service->price : 'N/A' }}</strong></h6>             <h6 class="text-md text-gray-500 mt-2">Date: <strong class="ml-2">{{$reservation->date}}</strong></h6>
                   <h6 class="text-md text-gray-500 mt-2">Time:<strong class="ml-2">{{$reservation->time}}</strong></h6>
                 </div>
                 <div class="mt-6 flex flex-wrap gap-6">

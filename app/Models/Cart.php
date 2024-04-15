@@ -13,5 +13,9 @@ class Cart extends Model
     public function booking(){
         return $this->hasMany(Booking::class);
     }
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 }
 

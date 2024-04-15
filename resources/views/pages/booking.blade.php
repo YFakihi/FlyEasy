@@ -1,55 +1,56 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <!-- head content -->
+    <style>
+        .form-section{
+            display: none;
+        }
+        .form-section.current{
+            display: inline;
+        }
+        .parsley-errors-list{
+            color:red;
+        }
+    </style>
 </head>
 <body>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
-</body>
-</html> --}}
+    
+    <!-- body content -->
 
 @extends('layouts.app')
 
 @section('title', 'Home')
 @section('content')
-<style>
-    
-    .form-section{
-        display: none;
-    }
-    
-    .form-section.current{
-        display: inline;
-    }
-    .parsley-errors-list{
-        color:red;
-    }
-    
-    </style>
+
+<div class="container mx-auto">
+    <div class="flex justify-center">
+      <div class="w-3/4">
+          <div class="card px-20 py-12 mt-12 shadow">
+
+            <div class="flex justify-between my-3">
+                <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step0">Step One</label>
+                <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step1">Step Two</label>
+                <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step2">Step Three</label>
+            </div>
+            
 
 
-
-<div class="container-fluid  ">
-    <div class="row justify-content-md-center">
-      <div class="col-md-9 ">
-          <div class="card px-5 py-3 mt-5 shadow">
-
-                      <div class="nav nav-fill my-3">
-                        <label class="nav-link shadow-sm step0    border ml-2 ">Step One</label>
-                        <label class="nav-link shadow-sm step1   border ml-2 " >Step Two</label>
-                        <label class="nav-link shadow-sm step2   border ml-2 " >Step Three</label>
-                      </div>
         
               <form action="{{ route('booking/create') }}" method="post" class="employee-form">
                @csrf
 
               <div class="form-section">
+
+                <div class="w-full mb-4">
+                    <label for="nom" class="block text-gray-600 font-semibold mb-2">Nom</label>
+                    <input type="text" id="nom" name="nom" class="px-4 py-2 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" placeholder="Votre Nom" required>
+                </div>
+
+                <div class="w-full mb-4">
+                    <label for="prenom" class="block text-gray-600 font-semibold mb-2">Prenom</label>
+                    <input type="prenom" id="prenom" name="prenom" class="px-4 py-2 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"required placeholder="Votre Prenom">
+                </div>
                 <div class="w-full mb-4">
                     <label class="block text-gray-600 font-semibold mb-2">Airport Services</label>
                     <div>
@@ -67,7 +68,7 @@
             
                 <div class="w-full mb-4">
                     <label for="airport" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Airports</label>
-                    <select id="airport" name="airport_id" class="bg-gray-0 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <select id="airport" name="airport_id" class="bg-gray-0 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
                         <option selected disabled>Select Airport</option>
                         @foreach ($airports as $airport)
                             <option value="{{ $airport->id }}">{{ $airport->name }}</option>
@@ -79,7 +80,7 @@
                 
                 <div class="w-full mb-4">
                     <label for="service" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Services</label>
-                    <select id="service" name="service_id" class="bg-gray-0 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <select id="service" name="service_id" class="bg-gray-0 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"required>
                         <option selected disabled>Select service</option>
                         @foreach ($airports as $airport)
                             @foreach ($airport->services as $service)
@@ -116,10 +117,10 @@
          
                 </div>
               </div>
-            <div class="form-navigation mt-3">
-               <button type="button" class="previous btn btn-primary float-left">&lt; Previous</button>
-               <button type="button" class="next btn btn-primary float-right">Next &gt;</button>
-               <button type="submit" class="btn btn-success float-right">Submit</button>
+              <div class="form-navigation flex justify-between mt-3">
+                <button type="button" class="previous px-4 py-2 rounded bg-blue-500 text-white float-right">&lt; Previous</button>
+                <button type="button" class="next px-4 py-2 rounded bg-blue-500 text-white ml-auto">Next &gt;</button>
+                <button type="submit" class="px-4 py-2 rounded bg-blue-500 text-white float-left">Submit</button>
             </div>
 
           </form>
@@ -129,16 +130,10 @@
     </div>
   </div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
   <script>
-  
-  </script>
-
-
-
-  <script>
-
-    $(function(){
+     $(function(){
         var $sections=$('.form-section');
 
         function navigateTo(index){
@@ -169,7 +164,7 @@
         });
 
         $('.form-navigation .next').click(function(){
-            $('.employee-form').parsley().whenValidate({
+           $('.employee-form').parsley().whenValidate({
                 group:'block-'+curIndex()
             }).done(function(){
                 navigateTo(curIndex()+1);
@@ -184,6 +179,8 @@
 
         navigateTo(0);
     });
+
+
 
 
     $(document).ready(function() {
@@ -206,9 +203,9 @@
   });
 
 
-</script>
-
-
-
-
+  </script>
+     <x-footer/>
 @endsection
+
+</body>
+</html>

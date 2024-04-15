@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Airport;
 use App\Models\Booking;
+use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,10 +16,11 @@ class CartController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $booking = $user->booking; 
+        $booking = $user->booking()->with('service')->get();
         $airports = Airport::all(); 
+        $services = Service::all();
         
-        return view('pages.pannier', compact('user', 'airports', 'booking'));
+        return view('pages.pannier', compact('user', 'airports', 'booking','services'));
         
     }
 

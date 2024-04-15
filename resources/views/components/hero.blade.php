@@ -1,29 +1,50 @@
-{{-- <section data-limit>
- 
-</section> --}}
-{{-- 
-<div class="grid max-w-screen-xl pb-8 pt-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 ml-4">
-    <div class="mr-auto place-self-center lg:col-span-7 ">
-        <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-4xl dark:text-white">Morocco FastTrack : Your Painless Passport to Travel Bliss</h1>
-        <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Embrace a seamless journey as FastTrack transforms airport hassles into effortless travel experiences for you..</p>
-        <a href="#products" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-800">
-            RESERVE NOW
-        </a>
-    </div>
-    <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-        <img src="{{ asset('images/reserve.png') }}" alt="reserve.png">
-    </div>                
-</div> --}}
+<script>
+  //hero slider
+document.addEventListener("DOMContentLoaded", function () {
+    const backgrounds = [
+        'url("{{ asset("images/Marrakech-Car.jpg") }}")', 
+        'url("{{ asset("images/Marrakech-Lounge.jpg") }}")',
+        'url("{{ asset("images/RAK-Lounge-Departures.jpg") }}")',
+     
+    ];
+
+    let currentBackgroundIndex = 0;
+    const backgroundSlider = document.getElementById('background-slider');
+
+    function changeBackground() {
+        backgroundSlider.style.transition = "background-image 1s ease-in";
+        backgroundSlider.style.backgroundImage = backgrounds[currentBackgroundIndex];
+        currentBackgroundIndex = (currentBackgroundIndex + 1) % backgrounds.length;
+    }
+
+    setInterval(changeBackground, 5000);
+});
+</script>
 
 
-<div class="relative font-[sans-serif] before:absolute before:w-full before:h-full before:inset-0 before:bg-black before:opacity-50 before:z-10 ">
-    <img src="https://readymadeui.com/cardImg.webp" alt="Banner Image" class="absolute inset-0 w-full h-full object-cover" />
-    <div class="min-h-[300px] relative z-50 h-full max-w-6xl mx-auto flex flex-col justify-center items-center text-center text-white p-6">
-      <h2 class="sm:text-4xl text-2xl font-bold mb-6">Explore the World</h2>
-      <p class="text-lg text-center text-gray-200">Embark on unforgettable journeys. Book your dream vacation today!</p>
-      <a href="javascript:void(0)"
-        class="mt-8 bg-transparent text-white text-base font-semibold py-2.5 px-6 border-2 border-white rounded hover:bg-white hover:text-black transition duration-300 ease-in-out">
-        Book Now
-      </a>
-    </div>
-  </div>
+
+<section class="bg-white relative dark:bg-gray-900" id="background-slider"
+        style="background: url('http://127.0.0.1:8000/storage/slider_imgs/greece.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center; padding-top: 120px; padding-bottom: 120px; position: relative;">
+        <div class="bg-black opacity-50 absolute inset-0 z-0"></div> <!-- Overlay element -->
+        <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 relative z-10">
+            <div class="mr-auto place-self-center lg:col-span-7">
+                <h1
+                    class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-white">
+                   FAST TRACK </br>MAROC </h1>
+                <h2 class="max-w-2xl mb-6 font-medium text-gray-200 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                    Une autre facon de voyager!</h2>
+                    <a href="{{ route('booking') }}"
+                    class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                    Booking Now</a>
+              
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+
+
+

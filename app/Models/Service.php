@@ -35,6 +35,10 @@ class Service extends Model
         return $this->belongsToMany(Airport::class);
     }
 
+    public function service(){
+        return $this->belongsTo(Cart::class);
+    }
+
 
 
 

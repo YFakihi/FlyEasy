@@ -10,7 +10,8 @@ class Airport extends Model
     use HasFactory;
 
     protected  $fillable = [
-        'name'
+        'name',
+        'images',
     ];
 
     public function user(){

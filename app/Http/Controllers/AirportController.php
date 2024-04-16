@@ -14,10 +14,20 @@ class AirportController extends Controller
 
     public function store (Request $request){
         $validatedata = $request->validate([
-            'name'=> 'required|string|max:250'
+            'name'=> 'required|string|max:250',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
-        Airport::create($validatedata);
+        $all = $request->all();
+    
+        if ($request->hasFile("image")) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $fileName = time() . '.' . $extension;
+            $path = 'uploads/airports/';
+            $file->move($path, $fileName);
+            $all["images"] = $fileName;
+        }
+        Airport::create($all);
        return redirect()->back()->with('success','airport bien ajouter!!');
     }
 

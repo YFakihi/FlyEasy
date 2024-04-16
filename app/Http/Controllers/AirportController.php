@@ -30,7 +30,11 @@ class AirportController extends Controller
         Airport::create($all);
        return redirect()->back()->with('success','airport bien ajouter!!');
     }
-
+    public function airportlist()
+    {
+        $airports = Airport::all();
+        return view('welcome', compact('airports'));
+    }
 
     public function getServices($id)
     {

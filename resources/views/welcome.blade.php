@@ -9,7 +9,8 @@
 
 @section('content')
 
-   <x-hero  />
+   <x-hero/>
+   <x-airportsList :airports="$airports" />
    <x-offers/>
    <x-footer/>
 @endsection

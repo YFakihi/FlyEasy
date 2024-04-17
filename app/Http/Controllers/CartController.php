@@ -24,8 +24,14 @@ class CartController extends Controller
 
         // Calculate total price
 
+        // $totalPrice = $booking->sum(function ($item) {
+        //     return $item->service->price * ($item->number_of_adults + $item->number_of_children);
+        // });
+
         $totalPrice = $booking->sum(function ($item) {
-            return $item->service->price * ($item->number_of_adults + $item->number_of_children);
+            $adultPrice = $item->service->price * $item->number_of_adults;
+            $childrenPrice = $item->service->price * $item->number_of_children * 0.6;
+            return $adultPrice + $childrenPrice;
         });
 
         $airports = Airport::all(); 

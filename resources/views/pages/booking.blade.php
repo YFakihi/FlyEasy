@@ -112,7 +112,7 @@
                 </div>
             
                 <div class="w-full mb-4">
-                    <label for="number_of_children" class="block text-gray-600 font-semibold mb-2">Number of Children</label>
+                    <label for="number_of_children" class="block text-gray-600 font-semibold mb-2">Number of Children < 18</label>
                     <input type="number" id="number_of_children" name="number_of_children" class="w-full px-4 py-2 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" placeholder="Number of Children" required>
          
                 </div>

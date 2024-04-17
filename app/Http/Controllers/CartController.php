@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Airport;
 use App\Models\Booking;
+use App\Models\Cart;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,17 +14,32 @@ class CartController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         $user = auth()->user();
         $booking = $user->booking()->with('service')->get();
-        // dd($booking);
-      
+    
+        // Dump the booking variable to check the price and quantity attributes
+
+        // Calculate total price
+
+        $totalPrice = $booking->sum(function ($item) {
+            return $item->service->price * ($item->number_of_adults + $item->number_of_children);
+        });
+
         $airports = Airport::all(); 
         $services = Service::all();
             
-        return view('pages.pannier', compact('user', 'airports', 'booking','services'));
-        
+        return view('pages.pannier', compact('user', 'airports', 'booking', 'services', 'totalPrice'));
+    }
+    public function showCart() {
+        $cartItems = Cart::where('user_id', auth()->id())->get();
+        $totalPrice = $cartItems->sum(function ($item) {
+            return $item->product->price * $item->quantity; // Calculate the total price
+        });
+    
+        return view('pannier', ['totalPrice' => $totalPrice]); // Pass the total price to the view
     }
 
 

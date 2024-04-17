@@ -17,7 +17,7 @@
                 <h3 class="text-xl font-extrabold text-[#333] mb-6">{{$reservation->user->name}}</h3>
                 <div>   
                   <h6 class="text-md text-gray-500">Airport: <strong class="ml-2">{{$reservation->airport->name}}</strong></h6>
-                  {{-- {{ dd($reservation->service_id) }} --}}
+
                   <h6 class="text-md text-gray-500 mt-2">Prix: <strong class="ml-2">{{ $reservation->service ? $reservation->service->price : 'N/A' }}</strong></h6>
                   <h6 class="text-md text-gray-500 mt-2">Time:<strong class="ml-2">{{$reservation->time}}</strong></h6>
                 </div>
@@ -39,13 +39,13 @@
       </div>
       <div class="shadow-md p-6">
         <h3 class="text-xl font-extrabold text-[#333] border-b pb-4">Order Summary</h3>
-        <ul class="text-[#333] divide-y mt-6">
-          <li class="flex flex-wrap gap-4 text-md py-4 font-bold">Total <span class="ml-auto">$63.5</span></li>
-        </ul>
+        <ul id="orderItems" class="text-[#333] divide-y mt-6">
+          <li class="flex flex-wrap gap-4 text-md py-4 font-bold">Total <span id="totalPrice" class="ml-auto">${{ $totalPrice }}</span></li>
+      </ul>
         <button type="button" class="mt-6 text-md px-6 py-2.5 w-full bg-blue-600 hover:bg-blue-700 text-white rounded">Check
           out</button>
-
-      </div>
+       </div>
     </div>
   </div>
+
   @endsection

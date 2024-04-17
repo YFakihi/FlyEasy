@@ -19,7 +19,6 @@ class CartController extends Controller
     {
         $user = auth()->user();
         $booking = $user->booking()->with('service')->get();
-    
         // Dump the booking variable to check the price and quantity attributes
 
         // Calculate total price

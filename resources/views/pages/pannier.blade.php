@@ -37,14 +37,26 @@
         @endforeach
         
       </div>
-      <div class="shadow-md p-6">
+
+      <form action="{{ route('session') }}" method="POST">
+        <a href="{{ url('/') }}" class="btn btn-danger"> <i class="fa fa-arrow-left"></i> Continue Shopping</a>
+        @csrf
+        <input type='hidden' name="total" value="6"> <!-- Example value, replace it with dynamic value -->
+        <input type='hidden' name="productname" value="Asus Vivobook 17 Laptop - Intel Core 10th"> <!-- Example value, replace it with dynamic value -->
+        <li class="flex flex-wrap gap-4 text-md py-4 font-bold">Total <span id="totalPrice" class="ml-auto">${{ $totalPrice }}</span></li> <!-- Make sure $totalPrice is defined in your view -->
+        <button class="btn btn-success" type="submit" id="checkout-live-button"><i class="fa fa-money"></i> Checkout</button>
+    </form>
+    
+
+
+      {{-- <div class="shadow-md p-6">
         <h3 class="text-xl font-extrabold text-[#333] border-b pb-4">Order Summary</h3>
         <ul id="orderItems" class="text-[#333] divide-y mt-6">
           <li class="flex flex-wrap gap-4 text-md py-4 font-bold">Total <span id="totalPrice" class="ml-auto">${{ $totalPrice }}</span></li>
       </ul>
-        <button type="button" class="mt-6 text-md px-6 py-2.5 w-full bg-blue-600 hover:bg-blue-700 text-white rounded">Check
+        <button type="submit" class="mt-6 text-md px-6 py-2.5 w-full bg-blue-600 hover:bg-blue-700 text-white rounded">Check
           out</button>
-       </div>
+       </div> --}}
     </div>
   </div>
 

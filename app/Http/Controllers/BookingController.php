@@ -46,12 +46,13 @@ class BookingController extends Controller
         'service_id' => 'required|exists:services,id', // Corrected line
     ]);
 
+
     // Add the authenticated user's ID to the request data
     $validatedData['user_id'] = auth()->id();
 
     // Create a new booking using the validated data
     $booking = Booking::create($validatedData);
-
+dd($booking);
     // Redirect or respond as needed
     return redirect()->back()->with('success', 'Booking created successfully.');
 }

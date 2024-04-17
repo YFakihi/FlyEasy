@@ -24,7 +24,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::get('about', function () {
     return view('pages/about');
 })->name('about');
@@ -38,7 +37,7 @@ Route::get('booking', function () {
 })->name('booking');
 
 
-
+//airport
 Route::get('/airports', [AirportController::class,'index'])->name('airports');
 Route::post('/airports', [AirportController::class,'store'])->name('add_airports');
 Route::delete('/delete/{id}', [AirportController::class,'delete'])->name('airports.delete');
@@ -46,12 +45,14 @@ Route::put('/airports/{id}', [AirportController::class, 'update'])->name('airpor
 Route::get('/get-services/{id}', [AirportController::class, 'getServices']);
 Route::get('/', [AirportController::class, 'airportlist'])->name('welcome');
 
+
+//services
 Route::get('/service', [ServiceController::class,'index'])->name('showservices');
 Route::post('/services', [ServiceController::class,'store'])->name('add_services');
 Route::delete('/remove/{id}',[ServiceController::class, 'destroy'])->name('services.delete');
 Route::put('/update/{id}', [ServiceController::class,'update'])->name('service.update');
 
-
+//booking
 
 Route::get('/booking',[BookingController::class,'index'])->name('booking');
 
@@ -67,7 +68,11 @@ Route::get('remove/booking/{id}', [CartController::class, 'remove'])->name('remo
 
 
 
+//payment
+Route::post('/session', 'App\Http\Controllers\StripeController@session')->name('session');
+Route::get('/success', 'App\Http\Controllers\StripeController@success')->name('success');
 
+//auth
 
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::get('/register', [AuthController::class, 'index'])->name('register');

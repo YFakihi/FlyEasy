@@ -32,7 +32,7 @@
                 <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step0">Step One</label>
                 <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step1">Step Two</label>
                 <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step2">Step Three</label>
-                <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step2">Step Fore</label>
+                <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step3">Step Four</label>
             </div>
             
 

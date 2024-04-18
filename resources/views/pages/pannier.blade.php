@@ -40,23 +40,26 @@
       <form action="{{ route('session') }}" method="POST" id="checkout-form">
         @csrf
         <!-- Add other form fields if needed -->
+        <h3 class="text-xl font-extrabold text-[#333] border-b pb-4">Order Summary</h3>
         <input type="hidden" name="productname" value="Asus Vivobook 17 Laptop - Intel Core 10th">
         <input type="hidden" name="totalPrice" value="{{ $totalPrice }}">
         <!-- Display total price -->
-        <div>Total: ${{ $totalPrice }}</div>
-        <!-- Add a submit button -->
-        <button type="submit">Checkout</button>
+        <ul id="orderItems" class="text-[#333] divide-y mt-6">
+          <li class="flex flex-wrap gap-4 text-md py-4 font-bold">Total <span id="totalPrice" class="ml-auto">${{ $totalPrice }}</span></li>
+      </ul>        <!-- Add a submit button -->
+      <button type="submit" class="mt-6 text-md px-6 py-2.5 w-full bg-blue-600 hover:bg-blue-700 text-white rounded">Check
+        out</button>
     </form>
 
 
-      <div class="shadow-md p-6">
+      {{-- <div class="shadow-md p-6">
         <h3 class="text-xl font-extrabold text-[#333] border-b pb-4">Order Summary</h3>
         <ul id="orderItems" class="text-[#333] divide-y mt-6">
           <li class="flex flex-wrap gap-4 text-md py-4 font-bold">Total <span id="totalPrice" class="ml-auto">${{ $totalPrice }}</span></li>
       </ul>
         <button type="submit" class="mt-6 text-md px-6 py-2.5 w-full bg-blue-600 hover:bg-blue-700 text-white rounded">Check
           out</button>
-       </div>
+       </div> --}}
     </div>
   </div>
 

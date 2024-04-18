@@ -32,6 +32,7 @@
                 <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step0">Step One</label>
                 <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step1">Step Two</label>
                 <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step2">Step Three</label>
+                <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step2">Step Fore</label>
             </div>
             
 
@@ -42,15 +43,7 @@
 
               <div class="form-section">
 
-                <div class="w-full mb-4">
-                    <label for="nom" class="block text-gray-600 font-semibold mb-2">Nom</label>
-                    <input type="text" id="nom" name="nom" class="px-4 py-2 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" placeholder="Votre Nom" required>
-                </div>
-
-                <div class="w-full mb-4">
-                    <label for="prenom" class="block text-gray-600 font-semibold mb-2">Prenom</label>
-                    <input type="prenom" id="prenom" name="prenom" class="px-4 py-2 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"required placeholder="Votre Prenom">
-                </div>
+               
                 <div class="w-full mb-4">
                     <label class="block text-gray-600 font-semibold mb-2">Airport Services</label>
                     <div>
@@ -108,15 +101,20 @@
                 <div class="w-full mb-4">
                     <label for="number_of_adults" class="block text-gray-600 font-semibold mb-2">Number of Adults</label>
                     <input type="number" id="number_of_adults" name="number_of_adults" class="w-full px-4 py-2 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" required>
-         
                 </div>
-            
+                
                 <div class="w-full mb-4">
-                    <label for="number_of_children" class="block text-gray-600 font-semibold mb-2">Number of Children < 18</label>
+                    <label for="number_of_children" class="block text-gray-600 font-semibold mb-2">Number of Children: Ages 2 to 18 years: 50% of Adult Price</label>
                     <input type="number" id="number_of_children" name="number_of_children" class="w-full px-4 py-2 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" placeholder="Number of Children" required>
-         
                 </div>
               </div>
+
+              <div class="form-section">
+                <div id="input-container" class="mt-4">
+                    <!-- This div will hold the dynamically generated inputs -->
+                </div>
+              </div>
+
               <div class="form-navigation flex justify-between mt-3">
                 <button type="button" class="previous px-4 py-2 rounded bg-blue-500 text-white float-right">&lt; Previous</button>
                 <button type="button" class="next px-4 py-2 rounded bg-blue-500 text-white ml-auto">Next &gt;</button>
@@ -129,6 +127,8 @@
       </div>
     </div>
   </div>
+
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
@@ -149,8 +149,6 @@
             const step= document.querySelector('.step'+index);
             step.style.backgroundColor="#17a2b8";
             step.style.color="white";
-
-
 
         }
 
@@ -182,7 +180,7 @@
 
 
 
-
+// the script is an AJAX request that is triggered when the selected value of the '#airport' dropdown changes.
     $(document).ready(function() {
       $('#airport').change(function() {
           var airportId = $(this).val();
@@ -204,6 +202,79 @@
 
 
   </script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get references to the "number of adults" and "number of children" inputs
+        const numberOfAdultsInput = document.getElementById('number_of_adults');
+        const numberOfChildrenInput = document.getElementById('number_of_children');
+        
+        // Get a reference to the dynamic inputs container
+        const dynamicInputsContainer = document.getElementById('input-container');
+        
+        // Function to generate inputs based on the number of adults and children
+        function generateDynamicInputs() {
+            // Clear any existing dynamic inputs
+            dynamicInputsContainer.innerHTML = '';
+            
+            // Get the number of adults and children
+            const numberOfAdults = parseInt(numberOfAdultsInput.value);
+            const numberOfChildren = parseInt(numberOfChildrenInput.value);
+            
+            // Generate inputs for each adult
+            for (let i = 1; i <= numberOfAdults; i++) {
+                const adultDiv = document.createElement('div');
+                adultDiv.classList.add('mb-4');
+                
+                const adultLabel = document.createElement('label');
+                adultLabel.textContent = `Adult ${i} Name:`;
+                adultLabel.classList.add('block', 'text-gray-600', 'font-semibold', 'mb-2');
+                
+                const adultInput = document.createElement('input');
+                adultInput.type = 'text';
+                adultInput.name = `adult_${i}_name`;
+                adultInput.classList.add('w-full', 'px-4', 'py-2', 'rounded-lg', 'bg-gray-200', 'border-transparent', 'focus:border-gray-500', 'focus:bg-white', 'focus:ring-0');
+                adultInput.placeholder = `Enter adult ${i} name`;
+                
+                // Append label and input to the adult div
+                adultDiv.appendChild(adultLabel);
+                adultDiv.appendChild(adultInput);
+                
+                // Append the adult div to the dynamic inputs container
+                dynamicInputsContainer.appendChild(adultDiv);
+            }
+            
+            // Generate inputs for each child
+            for (let i = 1; i <= numberOfChildren; i++) {
+                const childDiv = document.createElement('div');
+                childDiv.classList.add('mb-4');
+                
+                const childLabel = document.createElement('label');
+                childLabel.textContent = `Child ${i} Name:`;
+                childLabel.classList.add('block', 'text-gray-600', 'font-semibold', 'mb-2');
+                
+                const childInput = document.createElement('input');
+                childInput.type = 'text';
+                childInput.name = `child_${i}_name`;
+                childInput.classList.add('w-full', 'px-4', 'py-2', 'rounded-lg', 'bg-gray-200', 'border-transparent', 'focus:border-gray-500', 'focus:bg-white', 'focus:ring-0');
+                childInput.placeholder = `Enter child ${i} name`;
+                
+                // Append label and input to the child div
+                childDiv.appendChild(childLabel);
+                childDiv.appendChild(childInput);
+                
+                // Append the child div to the dynamic inputs container
+                dynamicInputsContainer.appendChild(childDiv);
+            }
+        }
+
+        // Add event listeners to generate dynamic inputs when the number of adults or children changes
+        numberOfAdultsInput.addEventListener('input', generateDynamicInputs);
+        numberOfChildrenInput.addEventListener('input', generateDynamicInputs);
+    });
+</script>
+
      <x-footer/>
 @endsection
 

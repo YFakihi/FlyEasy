@@ -3,6 +3,8 @@ use App\Http\Controllers\AirportController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\MollieController;
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgotPasswordController;
@@ -67,10 +69,11 @@ Route::get('remove/booking/{id}', [CartController::class, 'remove'])->name('remo
 
 
 
-
 //payment
-Route::post('/session', 'App\Http\Controllers\StripeController@session')->name('session');
-Route::get('/success', 'App\Http\Controllers\StripeController@success')->name('success');
+
+Route::post('/session', [StripeController::class, 'session'])->name('session');
+Route::get('/success', [StripeController::class, 'success'])->name('success');
+Route::get('cancel', [StripeController::class, 'cancel'])->name('cancel');
 
 //auth
 
@@ -86,3 +89,8 @@ Route::get('/forgot-password', [AuthController::class, 'showForgotPasswordForm']
 Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
+
+
+// Route::post('mollie', [MollieController::class, 'mollie'])->name('mollie');
+//  Route::get('/success', [MollieController::class, 'success'])->name('success');
+// Route::get('cancel', [MollieController::class, 'cancel'])->name('cancel');

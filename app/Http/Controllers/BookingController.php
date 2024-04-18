@@ -52,7 +52,7 @@ class BookingController extends Controller
 
     // Create a new booking using the validated data
     $booking = Booking::create($validatedData);
-dd($booking);
+
     // Redirect or respond as needed
     return redirect()->back()->with('success', 'Booking created successfully.');
 }

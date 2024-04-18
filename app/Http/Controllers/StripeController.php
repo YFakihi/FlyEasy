@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
-
+use Stripe\Exception\ApiErrorException;
+use Stripe\Stripe;
 
 class StripeController extends Controller
 {
@@ -14,33 +16,39 @@ class StripeController extends Controller
     {
         //
     }
+
     public function session(Request $request)
     {
-        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+        // Set your Stripe API key
+        Stripe::setApiKey(config('services.stripe.secret'));
     
-        $productName = $request->input('productname');
-        $totalPrice = $request->input('total') * 100; // Convert total to cents
+            // Retrieve product name and total price from the request
+            $productName = $request->input('productname');
+            $totalPrice = $request->input('totalPrice');
     
-        $session = \Stripe\Checkout\Session::create([
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-                'price_data' => [
-                    'currency' => 'USD',
-                    'product_data' => [
-                        'name' => $productName,
+            // Create a Stripe Checkout session
+            $session = \Stripe\Checkout\Session::create([
+                'payment_method_types' => ['card'],
+                'line_items' => [[
+                    'price_data' => [
+                        'currency' => 'USD',
+                        'product_data' => [
+                            'name' => $productName,
+                        ],
+                        'unit_amount' => $totalPrice * 100, // Convert total to cents
                     ],
-                    'unit_amount' => $totalPrice +1,
-                ],
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => route('success'),
-            'cancel_url' => route('cart'),
-        ]);
+                    'quantity' => 1,
+                ]],
+                'mode' => 'payment',
+                'success_url' => route('success') . '?session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => route('cancel'),
+            ]);
     
-        return redirect()->away($session->url);
-    }
+            return redirect()->away($session->url);
+        } 
+
     
+
     public function success()
     {
         return "Thanks for you order You have just completed your payment. The seeler will reach out to you as soon as possible";

@@ -36,29 +36,30 @@ Route::get('home', function () {
 
 Route::get('booking', function () {
     return view('pages/booking');
-})->name('booking');
+})->name('booking')->middleware('auth');
+
 
 
 //airport
-Route::get('/airports', [AirportController::class,'index'])->name('airports');
-Route::post('/airports', [AirportController::class,'store'])->name('add_airports');
-Route::delete('/delete/{id}', [AirportController::class,'delete'])->name('airports.delete');
-Route::put('/airports/{id}', [AirportController::class, 'update'])->name('airports.update');
-Route::get('/get-services/{id}', [AirportController::class, 'getServices']);
-Route::get('/', [AirportController::class, 'airportlist'])->name('welcome');
+Route::get('/airports', [AirportController::class,'index'])->name('airports')->middleware('auth');
+Route::post('/airports', [AirportController::class,'store'])->name('add_airports')->middleware('auth');
+Route::delete('/delete/{id}', [AirportController::class,'delete'])->name('airports.delete')->middleware('auth');
+Route::put('/airports/{id}', [AirportController::class, 'update'])->name('airports.update')->middleware('auth');
+Route::get('/get-services/{id}', [AirportController::class, 'getServices'])->middleware('auth');
+Route::get('/', [AirportController::class, 'airportlist'])->name('welcom');
+
 
 
 //services
-Route::get('/service', [ServiceController::class,'index'])->name('showservices');
-Route::post('/services', [ServiceController::class,'store'])->name('add_services');
-Route::delete('/remove/{id}',[ServiceController::class, 'destroy'])->name('services.delete');
-Route::put('/update/{id}', [ServiceController::class,'update'])->name('service.update');
+Route::get('/service', [ServiceController::class,'index'])->name('showservices')->middleware('auth');
+Route::post('/services', [ServiceController::class,'store'])->name('add_services')->middleware('auth');
+Route::delete('/remove/{id}',[ServiceController::class, 'destroy'])->name('services.delete')->middleware('auth');
+Route::put('/update/{id}', [ServiceController::class,'update'])->name('service.update')->middleware('auth');
 
 //booking
 
-Route::get('/booking',[BookingController::class,'index'])->name('booking');
-
-Route::post('/booking/reserve', [BookingController::class, 'create'])->name('booking/create');
+Route::get('/booking',[BookingController::class,'index'])->name('booking')->middleware('auth');
+Route::post('/booking/reserve', [BookingController::class, 'create'])->name('booking/create')->middleware('auth');
 
 Route::get('/reservation',[BookingController::class,'display'])->name('bookingTable');
 

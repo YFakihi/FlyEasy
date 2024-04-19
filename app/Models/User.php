@@ -45,6 +45,14 @@ class User extends Authenticatable
 
     public function booking()
     {
-        return $this->hasMany(Booking::class);
+        return $this->belongsToMany(Booking::class);
     }
+
+
+//     // In User model
+// public function bookings()
+// {
+//     return $this->belongsToMany(Booking::class);
+// }
+
 }

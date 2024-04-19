@@ -25,7 +25,7 @@ class Booking extends Model
 
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class);
     }  
     
     public function airport(){
@@ -39,4 +39,7 @@ class Booking extends Model
     public function card(){
         return $this->belongsTo(Cart::class);
     }
+
+
+
 }

@@ -1,145 +1,316 @@
+{{-- 
 
-
-<nav class="bg-white  dark:bg-gray-900  w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600 mb-6 ">
-
+<nav class="bg-white dark:bg-gray-900 w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600 mb-6">
   <section class='py-2 bg-[#1d294f] text-white text-center px-10'>
     <p class='text-sm'>Summer sale: Save up to 40%</p>
   </section>
 
-{{-- <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
-  <div class="px-4 py-3">
-    <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-    <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
-  </div>
-  <ul class="py-2" aria-labelledby="user-menu-button">
-    <li>
-      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
-    </li>
-    <li>
-      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-    </li>
-    <li>
-      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
-    </li>
-    <li>
-      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
-    </li>
-  </ul>
-</div> --}}
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="/" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-      <img src="{{asset("images/logo.png")}}" class="h-10" /> 
+      <img src="{{ asset('images/logo.png') }}" class="h-10" alt="Logo" />
     </a>
-  <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
 
-    @guest
-    <a type="button" href="{{route('login')}}" class="text-white mr-2 bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-900 dark:hover:bg-blue-900 dark:focus:ring-blue-800">Login</a>
+    <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
 
-    <a type="button" href="{{route('register')}}" class="text-white bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-900 dark:hover:bg-blue-900 dark:focus:ring-blue-800">Get started</a>
-  @endguest
-  @auth
-  <a href="{{route('cart')}}">
-    <svg class="w-6 h-6 text-gray-800 ml-72 mr-8 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
-    </svg>
-  </a>
-  <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none mr-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="document.getElementById('logoutform');" href="{{route('logout')}}">Logout</a>
-  {{-- <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" href="#">Welcome {{auth()->user()->name}}</a> --}}
-  <form id="logoutform" action="{{route('logout')}}" method="post">
-    @csrf
-  </form>
-@endauth
-      {{-- <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Get started</button> --}}
-      <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
-        <span class="sr-only">Open main menu</span>
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+      @guest
+      <a type="button" href="{{ route('login') }}" class="text-white mr-2 bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-900 dark:hover:bg-blue-900 dark:focus:ring-blue-800">Login</a>
+
+      <a type="button" href="{{ route('register') }}" class="text-white bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-900 dark:hover:bg-blue-900 dark:focus:ring-blue-800">Get started</a>
+
+      @endguest
+
+      @auth
+      <a href="{{ route('cart') }}">
+        <svg class="w-6 h-6 text-gray-800 ml-72 mr-8 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
         </svg>
+      </a>
+      <button id="dropdownToggle" onclick="toggleDropdown()" class="flex items-center focus:outline-none">
+        <img src="{{ asset('images/user.png') }}" alt="User" class="w-8 h-8 rounded-full">
     </button>
-  </div>
-  <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-    <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-      <li>
-        <a href="/" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
-      </li>
-      <li>
-        <a href="{{route('about')}}" class="block py-2 px-3  text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-      </li>
-      <li>
-        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-      </li>
-      <li>
-        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-      </li>
-    </ul>
- 
- 
+
+      <!-- Dropdown -->
+   
+</div>
+
+      @endauth
+    </div>
+
+    <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+      <span class="sr-only">Open main menu</span>
+      <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+      </svg>
+    </button>
     
-  </div>
-  </div>
-</nav>
-
-
-
-
-
-
-
-
-{{-- <nav>
-  <div class="px-8 flex w-full z-40 bg-white-800 shadow-sm transition duration-300 ease-in-out" id="navbar">
-    <div class="flex h-16 items-center justify-between w-full">
-      <div class="flex items-center justify-start w-full sm:items-stretch sm:justify-between">
-        <div class="sm:hidden">
-          <!-- Hamburger menu icon for mobile -->
-          <button id="menu-toggle" class="block text-gray-500 hover:text-white focus:outline-none focus:text-white">
-            <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
-              <path class="fill-current" d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-          </button>
-        </div>
-        <div class="hidden sm:ml-6 sm:block">
-          <div class="flex space-x-5">
-            <a href="/" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-              <img src="{{asset("images/logo.png")}}" class="h-10" /> 
-            </a>
-            <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
-              <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                <li>
-                  <a href="/" class="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500" aria-current="page">Home</a>
-                </li>
-                <li>
-                  <a href="{{route('about')}}" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-                </li>
-                <li>
-                  <a href="#" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 d:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-                </li>
-                <li>
-                  <a href="#" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="hidden sm:flex sm:flex-row gap-3">
-          @guest
-            <a type="button" href="{{route('login')}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</a>
-
-            <a type="button" href="{{route('register')}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Get started</a>
-          @endguest
-          @auth
-            <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="document.getElementById('logoutform');" href="{{route('logout')}}">Logout</a>
-            <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" href="#">Welcome {{auth()->user()->name}}</a>
-            <form id="logoutform" action="{{route('logout')}}" method="post">
-              @csrf
-            </form>
-          @endauth
-        </div>
-      </div>
-    </div>
-    <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-      <!-- Right side content -->
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <li>
+          <a href="/" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
+        </li>
+        <li>
+          <a href="{{ route('about') }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+        </li>
+        <li>
+          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
+        </li>
+        <li>
+          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+        </li>
+      </ul>
     </div>
   </div>
+  <script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdown');
+        dropdown.classList.toggle('hidden');
+    }
+</script>
 </nav> --}}
 
+
+
+    <nav class="bg-white border-b border-gray-200 px-4 py-2.5 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50">
+      <div class="flex flex-wrap justify-between items-center">
+        <div class="flex justify-start items-center">
+          <button
+            data-drawer-target="drawer-navigation"
+            data-drawer-toggle="drawer-navigation"
+            aria-controls="drawer-navigation"
+            class="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer md:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            <svg
+              aria-hidden="true"
+              class="w-6 h-6"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+            <svg
+              aria-hidden="true"
+              class="hidden w-6 h-6"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+            <span class="sr-only">Toggle sidebar</span>
+          </button>
+          <a href="/" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+            <img src="{{asset("images/logo.png")}}" class="h-10" /> 
+          </a>
+          {{-- <form action="#" method="GET" class="hidden md:block md:pl-2">
+            <label for="topbar-search" class="sr-only">Search</label>
+            <div class="relative md:w-64 md:w-96">
+              <div
+                class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+              >
+                <svg
+                  class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                  ></path>
+                </svg>
+              </div>
+              <input
+                type="text"
+                name="email"
+                id="topbar-search"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Search"
+              />
+            </div>
+          </form> --}}
+        </div>
+        <div class="flex items-center lg:order-2">
+          <button
+            type="button"
+            data-drawer-toggle="drawer-navigation"
+            aria-controls="drawer-navigation"
+            class="p-2 mr-1 text-gray-500 rounded-lg md:hidden hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+          >
+            <span class="sr-only">Toggle search</span>
+            <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path clip-rule="evenodd" fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"></path>
+            </svg>
+          </button>
+          <!-- Notifications -->
+ 
+          
+          <!-- Dropdown menu -->
+
+          <!-- Apps -->
+          <button
+            type="button"
+            data-dropdown-toggle="apps-dropdown"
+            class="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+          >
+            <span class="sr-only">View notifications</span>
+            <!-- Icon -->
+            <svg
+              class="w-6 h-6"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+              ></path>
+            </svg>
+          </button>
+          <!-- Dropdown menu -->
+          <di v
+            class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+            id="apps-dropdown">
+            <div
+              class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-600 dark:text-gray-300">
+              Apps
+            </div>
+            <div class="grid grid-cols-3 gap-4 p-4">
+            
+              <a
+                href="#"
+                class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
+            
+
+
+                <svg
+                aria-hidden="true"
+                class="mx-auto mb-1 w-7 h-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
+                fill="currentColor"
+                viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6 2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2 6-6Z" clip-rule="evenodd"/>
+                </svg>
+                
+
+
+                <div class="text-sm text-gray-900 dark:text-white"></div>
+              </a>
+        
+              <a
+                href="#"
+                class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
+
+                <svg 
+                aria-hidden="true"
+                class="mx-auto mb-1 w-7 h-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">>
+                  <path fill-rule="evenodd" d="M5 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11.5c.07 0 .14-.007.207-.021.095.014.193.021.293.021h2a2 2 0 0 0 2-2V7a1 1 0 0 0-1-1h-1a1 1 0 1 0 0 2v11h-2V5a2 2 0 0 0-2-2H5Zm7 4a1 1 0 0 1 1-1h.5a1 1 0 1 1 0 2H13a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h.5a1 1 0 1 1 0 2H13a1 1 0 0 1-1-1Zm-6 4a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1ZM7 6a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H7Zm1 3V8h1v1H8Z" clip-rule="evenodd"/>
+                </svg>
+                
+                <div class="text-sm text-gray-900 dark:text-white">
+                  
+                </div>
+              </a>
+              <a
+                href="#"
+                class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
+                <svg
+                  aria-hidden="true"
+                  class="mx-auto mb-1 w-7 h-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    fill-rule="evenodd"
+                    d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <div class="text-sm text-gray-900 dark:text-white">
+                  
+                </div>
+              </a>
+            </div>
+          </di>
+
+
+      @guest
+      <a type="button" href="{{ route('login') }}" class="text-white mr-2 bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-900 dark:hover:bg-blue-900 dark:focus:ring-blue-800">Login</a>
+
+      <a type="button" href="{{ route('register') }}" class="text-white bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-900 dark:hover:bg-blue-900 dark:focus:ring-blue-800">Get started</a>
+
+      @endguest
+
+
+            @auth 
+          <button
+            type="button"
+            class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            id="user-menu-button"
+            aria-expanded="false"
+            data-dropdown-toggle="dropdown" >
+            <span class="sr-only">Open user menu</span>
+            <img
+              class="w-8 h-8 rounded-full"
+              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
+              alt="user photo"
+            />
+          </button>
+          <!-- Dropdown menu -->
+
+        <div
+            class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+            id="dropdown">
+            <div class="py-3 px-4">
+              <span
+                class="block text-sm font-semibold text-gray-900 dark:text-white"
+                >Neil Sims</span
+              >
+              <span
+                class="block text-sm text-gray-900 truncate dark:text-white"
+                >name@flowbite.com</span
+              >
+            </div>
+            <ul
+              class="py-1 text-gray-700 dark:text-gray-300"
+              aria-labelledby="dropdown">
+              <li>
+                <a
+                  href="#"
+                  class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
+                  >My profile</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
+                  >Account settings</a>
+              </li>
+            </ul>
+
+            <ul
+              class="py-1 text-gray-700 dark:text-gray-300"
+              aria-labelledby="dropdown">
+              <li>
+                <a class="text-gray-500 focus:ring-4 focus:outline-none mr-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="event.preventDefault(); document.getElementById('logoutform').submit();" href="{{route('logout')}}">Logout</a>
+                <form id="logoutform" action="{{route('logout')}}" method="post" style="display: none;">
+                    @csrf
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+@endauth
+      </div>
+    </nav>

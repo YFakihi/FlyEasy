@@ -1,3 +1,8 @@
+@extends('layouts.app')
+
+@section('title', 'Home')
+@section('content')
+
 <section
   class="ezy__epprofile1 light py-14 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white relative overflow-hidden z-10"
 >
@@ -236,3 +241,4 @@
     </div>
   </div>
 </section>
+@endsection

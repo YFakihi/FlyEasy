@@ -2,6 +2,7 @@
 use App\Http\Controllers\AirportController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProfiletController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\MollieController;
 use App\Http\Controllers\StripeController;
@@ -68,6 +69,8 @@ Route::get('add/to/cart/',[CartController::class,'index'])->name('cart');
 Route::get('remove/booking/{id}', [CartController::class, 'remove'])->name('remove_cart');
 
 
+//profile
+Route::get('/profile', [ProfiletController::class, 'index'])->name('profile')->middleware('auth');
 
 //payment
 

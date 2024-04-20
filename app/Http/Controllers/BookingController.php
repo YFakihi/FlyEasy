@@ -61,6 +61,13 @@ class BookingController extends Controller
     // Redirect or respond as needed
     return redirect()->back()->with('success', 'Booking created successfully.');
 }
+
+public function overview(){
+    $airports = Airport::all();
+    $booking = booking::all();
+    $services = Service::all();
+    return view('dashboard.overview',compact('airports'));
+}
     /**
      * Store a newly created resource in storage.
      */

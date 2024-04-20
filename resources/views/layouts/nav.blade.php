@@ -223,7 +223,7 @@
               </li>
               <li>
                 <a
-                  href="#"
+                  href="{{route('home')}}"
                   class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
                   >Dashboard</a>
               </li>
@@ -233,7 +233,7 @@
               class="py-1 text-gray-700 dark:text-gray-300"
               aria-labelledby="dropdown">
               <li>
-                <a class="text-gray-500 focus:ring-4 focus:outline-none mr-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="event.preventDefault(); document.getElementById('logoutform').submit();" href="{{route('logout')}}">Logout</a>
+                <a class="text-gray-500   font-medium rounded-lg text-sm px-4 py-2 text-center " onclick="event.preventDefault(); document.getElementById('logoutform').submit();" href="{{route('logout')}}">Logout</a>
                 <form id="logoutform" action="{{route('logout')}}" method="post" style="display: none;">
                     @csrf
                 </form>

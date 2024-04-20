@@ -312,7 +312,7 @@
         <ul class="space-y-2">
           <li>
             <a
-              href="#"
+              href="{{route('overview')}}"
               class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
             >
               <svg
@@ -613,10 +613,11 @@
       <div class=" rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
       
         @yield('content')
-      
-      </div>
-    
+        
     </main>
   </div>
+
+
+
 
   

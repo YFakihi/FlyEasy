@@ -2,6 +2,7 @@
 use App\Http\Controllers\AirportController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfiletController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\MollieController;
@@ -23,9 +24,13 @@ use App\Http\Controllers\ForgotPasswordController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('welcome');
+
+Route::get('/', [HomeController::class,'index'])->name('welcome');
+
+
 
 Route::get('about', function () {
     return view('pages/about');
@@ -47,7 +52,7 @@ Route::post('/airports', [AirportController::class,'store'])->name('add_airports
 Route::delete('/delete/{id}', [AirportController::class,'delete'])->name('airports.delete')->middleware('auth');
 Route::put('/airports/{id}', [AirportController::class, 'update'])->name('airports.update')->middleware('auth');
 Route::get('/get-services/{id}', [AirportController::class, 'getServices'])->middleware('auth');
-Route::get('/', [AirportController::class, 'airportlist'])->name('welcom');
+// Route::get('/', [AirportController::class, 'airportlist'])->name('welcom');
 
 
 
@@ -75,6 +80,7 @@ Route::get('/profile', [ProfiletController::class, 'index'])->name('profile')->m
 //payment
 
 Route::post('/session', [StripeController::class, 'session'])->name('session');
+// Route::get('/success', [StripeController::class, 'success'])->name('success');
 Route::get('/success', [StripeController::class, 'success'])->name('success');
 Route::get('cancel', [StripeController::class, 'cancel'])->name('cancel');
 

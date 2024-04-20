@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Session\Session;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Stripe\Exception\ApiErrorException;
 use Stripe\Stripe;
+use App\Models\Payment;
+use Illuminate\Support\Facades\Schema;
 
 class StripeController extends Controller
 {
@@ -21,9 +24,9 @@ class StripeController extends Controller
     public function session(Request $request)
     {
         // Set your Stripe API key
-        Stripe::setApiKey(config('services.stripe.secret'));
+        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
         
-        // Retrieve product name and total price from the request
+        // Retrieve product name, total price, and booking ID from the request
         $productName = $request->input('productname');
         $totalPrice = $request->input('totalPrice');
         $bookingId = $request->input('bookingId');
@@ -50,53 +53,64 @@ class StripeController extends Controller
         ]);
     
         return redirect()->away($session->url);
-    } 
+    }
     
-
+    public function up(): void
+    {
+        Schema::create('payments', function (Blueprint $table) {
+            $table->id();
+            $table->string('booking_id');
+            $table->decimal('amount', 10, 2);
+            $table->string('currency');
+            $table->string('payment_status');
+            $table->string('payment_method');
+            $table->integer('user_id');
+            $table->string('payment_id')->nullable();
+            $table->timestamps();
+        });
+    }
     
-        public function success(Request $request)
-        {
-            // Retrieve the session ID from the request
-            $sessionId = $request->query('session_id');
+    public function success(Request $request)
+    {
+        // Set your Stripe API key
+        Stripe::setApiKey(config('services.stripe.secret'));
         
-            // Retrieve session details from Stripe
-            Stripe::setApiKey(config('services.stripe.secret'));
-            $checkout_session = \Stripe\Checkout\Session::retrieve($sessionId);
-        
-   
-            // Debug: Dump the checkout session
-
-        
-            // Retrieve product name and total price
-            $productName = isset($checkout_session->display_items[0]->custom->name) ? $checkout_session->display_items[0]->custom->name : null;
-            $totalPrice = isset($checkout_session->display_items[0]->amount) ? $checkout_session->display_items[0]->amount / 100 : null; // Convert back to dollars
-        
-            // Retrieve other necessary details
-            $paymentId = $checkout_session->payment_intent;
-            $bookingId = isset($checkout_session->metadata->booking_id) ? $checkout_session->metadata->booking_id : null;
-            $currency = isset($checkout_session->display_items[0]->amount->currency) ? $checkout_session->display_items[0]->amount->currency : null;
-            $paymentStatus = isset($checkout_session->payment_status) ? $checkout_session->payment_status : null;
-            $paymentMethod = isset($checkout_session->payment_method) ? $checkout_session->payment_method : null;
-            $userId = auth()->id();
-        
-            // Check if booking id is not null
-            if ($bookingId !== null) {
-                // Store payment information in the payments table
-                DB::table('payments')->insert([
-                    'payment_id' => $paymentId,
-                    'booking_id' => $bookingId,
-                    'amount' => $totalPrice,
-                    'currency' => $currency,
-                    'payment_status' => $paymentStatus,
-                    'payment_method' => $paymentMethod,
-                ]);
-        
-                return "Thanks for your order. You have just completed your payment. The seller will reach out to you as soon as possible.";
-            } else {
-                return "Booking ID is missing. Payment could not be completed.";
-            }
+        // Retrieve session ID from the request
+        $session_id = $request->get('session_id');
+    
+        try {
+            // Get the Stripe session
+            $stripe_session = \Stripe\Checkout\Session::retrieve($session_id);
+    
+            // Retrieve booking ID from metadata
+            $bookingId = $stripe_session->metadata->booking_id;
+    
+            // Retrieve payment details
+            $payment = \Stripe\PaymentIntent::retrieve($stripe_session->payment_intent);
+    
+            // Store payment details in the payments table
+            Payment::create([
+                'booking_id' => $bookingId,
+                'amount' => $payment->amount / 100, // Convert amount from cents to dollars
+                'currency' => 'USD', // Set a default value for the currency
+                'payment_status' => $payment->status,
+                'payment_method' => $payment->payment_method,
+                'user_id' => auth()->user()->id,
+            ]);
+    
+            // Redirect to a success page
+            return view('pages.success');
+        } catch (\Exception $e) {
+            return redirect()->route('cancel')->with('error', 'Error processing payment. Please try again.');
         }
-        
+    }
+    
+    
+
+    public function cancel()
+{
+    return redirect()->route('welcome')->with('error', 'Payment was canceled.');
+}
         
         
     /**

@@ -21,24 +21,29 @@ class Booking extends Model
         'airport_id',
         'service_id',
         'payment',
+        'first_name',
+        'last_name'
     ];
 
 
-    public function user(){
-        return $this->belongsToMany(User::class);
-    }  
+ 
     
     public function airport(){
         return $this->belongsTo(Airport::class);
     }
 
-    public function service(){
+    public function service()
+    {
         return $this->belongsTo(Service::class);
     }
-
     public function card(){
         return $this->belongsTo(Cart::class);
     }
+
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
 
 
 

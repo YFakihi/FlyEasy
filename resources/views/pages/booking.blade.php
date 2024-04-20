@@ -29,10 +29,10 @@
           <div class="card px-20 py-12 mt-12 shadow">
 
             <div class="flex justify-between my-3">
-                <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step0">Step One</label>
-                <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step1">Step Two</label>
-                <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step2">Step Three</label>
-                <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step3">Step Four</label>
+                <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step0">Services</label>
+                <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step1">Flight info</label>
+                <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step2">Details </label>
+                {{-- <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step3">Detais</label> --}}
             </div>
             
 
@@ -86,34 +86,44 @@
 
 
               <div class="form-section">
+
                 <div class="w-full mb-4">
                     <label for="date" class="block text-gray-600 font-semibold mb-2">Date</label>
                     <input type="date" id="date" name="date" class="w-full px-4 py-2 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"required>
-                
                 </div>
                 <div class="w-full mb-4">
                     <label for="time" class="block text-gray-600 font-semibold mb-2">Time</label>
                     <input type="time" id="time" name="time" class="w-full px-4 py-2 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" required>
-            
-                </div>
+                </div> 
+
               </div>
               <div class="form-section">
                 <div class="w-full mb-4">
                     <label for="number_of_adults" class="block text-gray-600 font-semibold mb-2">Number of Adults</label>
-                    <input type="number" id="number_of_adults" name="number_of_adults" class="w-full px-4 py-2 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" required>
+                    <input type="number" id="number_of_adults" name="number_of_adults" class="w-full px-4 py-2 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" required placeholder="Number Of Adults">
                 </div>
                 
                 <div class="w-full mb-4">
                     <label for="number_of_children" class="block text-gray-600 font-semibold mb-2">Number of Children: Ages 2 to 18 years: 50% of Adult Price</label>
                     <input type="number" id="number_of_children" name="number_of_children" class="w-full px-4 py-2 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" placeholder="Number of Children" required>
                 </div>
-              </div>
 
+                
+                <div class="w-full mb-4">
+                    <label for="fname" class="block text-gray-600 font-semibold mb-2">First Name</label>
+                    <input type="text" id="fname" name="first_name" class="w-full px-4 py-2 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"required placeholder="First Name">
+                </div>
+                <div class="w-full mb-4">
+                    <label for="lname" class="block text-gray-600 font-semibold mb-2">Last Name</label>
+                    <input type="text" id="lname" name="last_name" class="w-full px-4 py-2 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" required placeholder="Last Name">
+                </div> 
+              </div>
+{{-- 
               <div class="form-section">
                 <div id="input-container" class="mt-4">
                     <!-- This div will hold the dynamically generated inputs -->
                 </div>
-              </div>
+              </div> --}}
 
               <div class="form-navigation flex justify-between mt-3">
                 <button type="button" class="previous px-4 py-2 rounded bg-blue-500 text-white float-right">&lt; Previous</button>
@@ -203,7 +213,7 @@
 
   </script>
 
-
+{{-- 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Get references to the "number of adults" and "number of children" inputs
@@ -273,7 +283,7 @@
         numberOfAdultsInput.addEventListener('input', generateDynamicInputs);
         numberOfChildrenInput.addEventListener('input', generateDynamicInputs);
     });
-</script>
+</script> --}}
 
      <x-footer/>
 @endsection

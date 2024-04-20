@@ -15,42 +15,66 @@ class CartController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index()
+     public function index()
+     {
+         $user = auth()->user();
+         
+         $bookings = $user->booking()->with('service')->get();
+         
+         $airports = Airport::all(); 
+         $services = Service::all();
+     
+         foreach ($bookings as $booking) {
+             $totalPrice = $booking->service->price * ($booking->number_of_adults + $booking->number_of_children * 0.6);
+             $booking->totalPrice = $totalPrice;
+         }
+     
+         return view('pages.pannier', compact('user', 'airports', 'bookings', 'services'));
+     }
+     
+
+
+
+
+    public function showCart()
     {
-        $user = auth()->user();
-        $booking = $user->booking()->with('service')->get();
-        // dd($booking);
-        // Dump the booking variable to check the price and quantity attributes
-
-        // Calculate total price
-
-        // $totalPrice = $booking->sum(function ($item) {
-        //     return $item->service->price * ($item->number_of_adults + $item->number_of_children);
-        // });
-        // dd(auth()->user());
-
-        $totalPrice = $booking->sum(function ($item) {
-            $adultPrice = $item->service->price * $item->number_of_adults;
-            $childrenPrice = $item->service->price * $item->number_of_children * 0.6;
-            return $adultPrice + $childrenPrice;
-        });
-
-        $airports = Airport::all(); 
-        $services = Service::all();
-            
-        return view('pages.pannier', compact('user', 'airports', 'booking', 'services', 'totalPrice'));
-    }
-    public function showCart() {
         $cartItems = Cart::where('user_id', auth()->id())->get();
-        dd($cartItems);
-
+        
+        dd($cartItems); // Debug: Dump the cart items
+        
         $totalPrice = $cartItems->sum(function ($item) {
             return $item->product->price * $item->quantity; // Calculate the total price
-           
         });
+        
+        dd($totalPrice); // Debug: Dump the total price
+        
+        $booking_id = null;
+        $booking = null;
+        
+        if ($cartItems->isNotEmpty()) {
+            $firstCartItem = $cartItems->first();
+            $booking_id = $firstCartItem->booking_id;
+            $booking = Booking::find($booking_id);
+        }
+        
+        dd($booking); // Debug: Dump the booking
+        
+        if (!$booking) {
+            $booking = new Booking();
+            $booking->save();
+            $booking_id = $booking->id;
+        }
     
-        return view('pannier', ['totalPrice' => $totalPrice]); // Pass the total price to the view
+        if ($totalPrice !== null) {
+            $booking->amount = $totalPrice;
+            $booking->save();
+        }
+        
+        return view('pannier', compact('totalPrice', 'booking_id')); // Pass the total price and booking ID to the view
     }
+    
+    
+    
 
 
     public function remove($id)

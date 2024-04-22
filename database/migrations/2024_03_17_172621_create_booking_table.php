@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('airport_id')->constrained()->onDelete('cascade');
-            // $table->foreignId('fast_track_service_id')->constrained()->onDelete('cascade');
+        
             $table->date('date');
             $table->time('time');
-            $table->enum('payment', ['pending', 'confirmed']);
             $table->enum('service_type', ['departure_fast_track', 'arrival_fast_track']);
             $table->integer('number_of_adults');
             $table->integer('number_of_children');

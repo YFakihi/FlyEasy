@@ -17,19 +17,27 @@ class CartController extends Controller
 
      public function index()
      {
-         $user = auth()->user();
-         
-         $bookings = $user->booking()->with('service')->get();
-         
-         $airports = Airport::all(); 
-         $services = Service::all();
-     
-         foreach ($bookings as $booking) {
-             $totalPrice = $booking->service->price * ($booking->number_of_adults + $booking->number_of_children * 0.6);
-             $booking->totalPrice = $totalPrice;
-         }
-     
-         return view('pages.pannier', compact('user', 'airports', 'bookings', 'services'));
+        $user = auth()->user();
+        $bookings = auth()->user()->booking()->get();
+        dd($bookings);
+        // $bookings = $user->booking()->whereHas('payment', function ($query) {
+        //     $query->where('payment_status', 'pending');
+        // })->get();
+    
+        $airports = Airport::all(); 
+        $services = Service::all();
+
+        foreach ($bookings as $booking) {
+            if ($booking->payment) {
+                $booking->payment_status = $booking->payment->payment_status;
+            } else {
+                $booking->payment_status = 'paid';
+            }
+            $totalPrice = $booking->service->price * ($booking->number_of_adults + $booking->number_of_children * 0.6);
+            $booking->totalPrice = $totalPrice;
+        }
+
+        return view('pages.pannier', compact('user', 'airports', 'bookings', 'services'));
      }
      
 
@@ -39,14 +47,13 @@ class CartController extends Controller
     public function showCart()
     {
         $cartItems = Cart::where('user_id', auth()->id())->get();
+    
         
-        dd($cartItems); // Debug: Dump the cart items
+
         
         $totalPrice = $cartItems->sum(function ($item) {
             return $item->product->price * $item->quantity; // Calculate the total price
         });
-        
-        dd($totalPrice); // Debug: Dump the total price
         
         $booking_id = null;
         $booking = null;
@@ -57,7 +64,6 @@ class CartController extends Controller
             $booking = Booking::find($booking_id);
         }
         
-        dd($booking); // Debug: Dump the booking
         
         if (!$booking) {
             $booking = new Booking();

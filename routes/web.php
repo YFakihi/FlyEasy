@@ -66,7 +66,7 @@ Route::put('/update/{id}', [ServiceController::class,'update'])->name('service.u
 
 Route::get('/booking',[BookingController::class,'index'])->name('booking')->middleware('auth');
 Route::post('/booking/reserve', [BookingController::class, 'create'])->name('booking/create')->middleware('auth');
-Route::get('/reservation',[BookingController::class,'display'])->name('bookingTable');
+Route::get('/reservation',[BookingController::class,'displaybooking'])->name('listbooking');
 Route::get('/overview',[BookingController::class,'overview'])->name('overview')->middleware('auth');
 
 //cart

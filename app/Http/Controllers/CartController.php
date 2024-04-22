@@ -15,31 +15,24 @@ class CartController extends Controller
      * Display a listing of the resource.
      */
 
+ 
      public function index()
      {
-        $user = auth()->user();
-        $bookings = auth()->user()->booking()->get();
-        dd($bookings);
-        // $bookings = $user->booking()->whereHas('payment', function ($query) {
-        //     $query->where('payment_status', 'pending');
-        // })->get();
-    
-        $airports = Airport::all(); 
-        $services = Service::all();
-
-        foreach ($bookings as $booking) {
-            if ($booking->payment) {
-                $booking->payment_status = $booking->payment->payment_status;
-            } else {
-                $booking->payment_status = 'paid';
-            }
-            $totalPrice = $booking->service->price * ($booking->number_of_adults + $booking->number_of_children * 0.6);
-            $booking->totalPrice = $totalPrice;
-        }
-
-        return view('pages.pannier', compact('user', 'airports', 'bookings', 'services'));
-     }
+         $user = auth()->user();
      
+         $bookings = $user->booking()->where('payment_status', 'pending')->get();
+     
+         $airports = Airport::all(); 
+         $services = Service::all();
+     
+         foreach ($bookings as $booking) {
+             $totalPrice = $booking->service->price * ($booking->number_of_adults + $booking->number_of_children * 0.6);
+             $booking->totalPrice = $totalPrice;
+         }
+     
+         return view('pages.pannier', compact('user', 'airports', 'bookings', 'services'));
+     }
+    
 
 
 

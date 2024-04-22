@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Airport;
 use App\Models\Booking;
+use App\Models\Payment;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,18 +17,20 @@ class BookingController extends Controller
 
     public function index()
     {
-        $airports = Airport::with('services')->get();
+        $airports  = Airport::with('services')->get();
         $booking = Booking::all();
     
         return view('pages.booking', compact('booking', 'airports'));
     }
 
-    public function display(){
+    public function displaybooking()
+    {
         $booking = Booking::all();
         $user = User::all();
-        $airport = Airport::all();
+        $payments = Payment::all();
+        $airports = Airport::all();
        
-        return view('dashboard.booking',compact('booking','user','airport'));
+        return view('dashboard.booking',compact('booking','user','airports','payments'));
     }
 
     /**
@@ -38,7 +41,6 @@ class BookingController extends Controller
 
 {
 
-    // dd($request->all());
     $validatedData = $request->validate([
         'airport_id' => 'required|exists:airports,id',
         'date' => 'required|date',
@@ -50,17 +52,20 @@ class BookingController extends Controller
         'first_name' => 'required|string|max:255',
         'last_name' => 'required|string|max:255',
     ]);
-
-
+    
     // Add the authenticated user's ID to the request data
     $validatedData['user_id'] = auth()->id();
-
-    // Create a new booking using the validated data
+    
+    // Set a default value for payment_status
+    $validatedData['payment_status'] = 'pending';
+    
+    // Then you can create the booking
     $booking = Booking::create($validatedData);
 
     // Redirect or respond as needed
     return redirect()->back()->with('success', 'Booking created successfully.');
 }
+
 
 public function overview(){
     $airports = Airport::all();

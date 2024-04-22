@@ -32,7 +32,7 @@
                 <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step0">Services</label>
                 <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step1">Flight info</label>
                 <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step2">Details </label>
-                {{-- <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step3">Detais</label> --}}
+                {{-- <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step3">Check Out</label> --}}
             </div>
             
 
@@ -121,9 +121,28 @@
 {{-- 
               <div class="form-section">
                 <div id="input-container" class="mt-4">
-                    <!-- This div will hold the dynamically generated inputs -->
+                    <form action="{{ route('session') }}" method="POST" id="checkout-form">
+                        @csrf
+                        <!-- Add other form fields if needed -->
+                        <h3 class="text-xl font-extrabold text-[#333] border-b pb-4">Order Summary</h3>
+                        @if(isset($booking))
+                            <input type="hidden" name="productname" value="Asus Vivobook 17 Laptop - Intel Core 10th">
+                            <input type="hidden" name="totalPrice" value="{{ $booking->totalPrice }}">
+                            <input type="hidden" name="bookingId" value="{{ $booking->id }}">
+                            <!-- Display total price -->
+                            <ul id="orderItems" class="text-[#333] divide-y mt-6">
+                                <li class="flex flex-wrap gap-4 text-md py-4 font-bold">Total <span id="totalPrice" class="ml-auto">${{ $booking->totalPrice }}</span></li>
+                            </ul>        
+                            <!-- Add a submit button -->
+                            <button type="submit" class="mt-6 text-md px-6 py-2.5 w-full bg-blue-600 hover:bg-blue-700 text-white rounded">Check out</button>
+                        @endif
+                    </form>
                 </div>
-              </div> --}}
+            </div> --}}
+            
+            
+            
+            
 
               <div class="form-navigation flex justify-between mt-3">
                 <button type="button" class="previous px-4 py-2 rounded bg-blue-500 text-white float-right">&lt; Previous</button>

@@ -10,6 +10,8 @@ use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\PDFController;
+
 
 
 
@@ -99,7 +101,11 @@ Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->
 Route::get('/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 
+//email
 
-// Route::post('mollie', [MollieController::class, 'mollie'])->name('mollie');
-//  Route::get('/success', [MollieController::class, 'success'])->name('success');
-// Route::get('cancel', [MollieController::class, 'cancel'])->name('cancel');
+// Route::get('send-email-pdf', [PDFController::class, 'index']);
+Route::get('/booking/{id}/download', [PDFController::class, 'download'])->name('student.pdf');
+
+//Route::get('/booking/{id}/download', 'BookingController@download')->name('student.pdf');
+
+

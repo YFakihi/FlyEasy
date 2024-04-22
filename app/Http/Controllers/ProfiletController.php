@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Airport;
+use App\Models\Booking;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class ProfiletController extends Controller
@@ -11,9 +14,22 @@ class ProfiletController extends Controller
      */
     public function index()
     {
-        return view('pages.profile', [
-            'user' => auth()->user(),
-        ]);
+        $user = auth()->user();
+        
+        // Get all bookings that have been paid for the current user
+        $bookings = Booking::where('user_id', $user->id)
+                            ->where('payment_status', 'paid')
+                            ->get();
+        
+        $airports = Airport::all(); 
+        $services = Service::all();
+
+        foreach ($bookings as $booking) {
+            $totalPrice = $booking->service->price * ($booking->number_of_adults + $booking->number_of_children * 0.6);
+            $booking->totalPrice = $totalPrice;
+        }
+
+        return view('pages.profile', compact('user', 'airports', 'bookings', 'services'));
     }
 
     /**

@@ -8,7 +8,6 @@
                 <tr>
                     <th scope="col" class="px-4 py-4"> user_name </th>
                     <th scope="col" class="px-4 py-4"> airport</th>
-                    <th scope="col" class="px-4 py-4"> fast_track_service_id</th>
                     <th scope="col" class="px-4 py-4"> date</th>
                     <th scope="col" class="px-4 py-4"> time</th>
                     <th scope="col" class="px-4 py-4"> Payment</th>
@@ -22,11 +21,9 @@
                 <tr class="border-b dark:border-gray-700">
                     <td class="px-4 py-3">{{$reservation->user->name}}</td>
                     <td class="px-4 py-3">{{$reservation->airport->name}}</td>
-                    <td class="px-4 py-3">{{$reservation->fast_track_service_id}}</td>
                     <td class="px-4 py-3">{{$reservation->date}}</td>
                     <td class="px-4 py-3">{{$reservation->time}}</td> 
-                    <td class="px-4 py-3">{{$reservation->Payment}}</td> 
-                    <td class="px-4 py-3">{{$reservation->service_type}}</td>
+                    <td class="px-4 py-3">{{ optional($reservation->payment)->payment_status }}</td>                    <td class="px-4 py-3">{{$reservation->service_type}}</td>
                     <td class="px-4 py-3">{{$reservation->number_of_adults}}</td>
                     <td class="px-4 py-3">{{$reservation->number_of_children}}</td>
                 </tr>  

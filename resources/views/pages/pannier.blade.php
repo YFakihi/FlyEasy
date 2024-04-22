@@ -7,6 +7,7 @@
 <div class="font-[sans-serif]">
     <div class="grid lg:grid-cols-3 gap-12 p-6">
       <div class="lg:col-span-2 bg-white divide-y">
+
         @foreach ($bookings as $reservation)
         <div class="flex items-start max-sm:flex-col gap-8 py-6">
             <div class="h-52 shrink-0">

@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Session\Session;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Airport;
+use App\Models\Booking;
+use App\Models\Cart;
+use App\Models\Payment;
+use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 use Stripe\Exception\ApiErrorException;
 use Stripe\Stripe;
-use App\Models\Payment;
-use Illuminate\Support\Facades\Schema;
 
 class StripeController extends Controller
 {
@@ -24,7 +27,7 @@ class StripeController extends Controller
     public function session(Request $request)
     {
         // Set your Stripe API key
-        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+        Stripe::setApiKey(config('services.stripe.secret'));
         
         // Retrieve product name, total price, and booking ID from the request
         $productName = $request->input('productname');
@@ -59,12 +62,12 @@ class StripeController extends Controller
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('booking_id');
+            $table->unsignedBigInteger('booking_id');
             $table->decimal('amount', 10, 2);
             $table->string('currency');
             $table->string('payment_status');
             $table->string('payment_method');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('payment_id')->nullable();
             $table->timestamps();
         });
@@ -89,7 +92,7 @@ class StripeController extends Controller
             $payment = \Stripe\PaymentIntent::retrieve($stripe_session->payment_intent);
     
             // Store payment details in the payments table
-            Payment::create([
+            $paymentRecord = Payment::create([
                 'booking_id' => $bookingId,
                 'amount' => $payment->amount / 100, // Convert amount from cents to dollars
                 'currency' => 'USD', // Set a default value for the currency
@@ -98,19 +101,23 @@ class StripeController extends Controller
                 'user_id' => auth()->user()->id,
             ]);
     
+            // Update booking's payment status to "paid"
+            $booking = Booking::findOrFail($bookingId);
+            $booking->payment_status = 'paid';
+            $booking->save();
+    
             // Redirect to a success page
-            return view('pages.success');
+            return view('pages.success', ['paymentRecord' => $paymentRecord, 'error' => null]);
         } catch (\Exception $e) {
-            return redirect()->route('cancel')->with('error', 'Error processing payment. Please try again.');
+            return view('pages.success', ['error' => 'Error processing payment. Please try again.', 'paymentRecord' => null]);
         }
     }
     
     
-
     public function cancel()
-{
-    return redirect()->route('welcome')->with('error', 'Payment was canceled.');
-}
+    {
+        return redirect()->route('welcome')->with('error', 'Payment was canceled.');
+    }
         
         
     /**

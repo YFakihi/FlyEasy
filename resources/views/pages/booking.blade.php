@@ -145,9 +145,9 @@
             
 
               <div class="form-navigation flex justify-between mt-3">
-                <button type="button" class="previous px-4 py-2 rounded bg-blue-500 text-white float-right">&lt; Previous</button>
-                <button type="button" class="next px-4 py-2 rounded bg-blue-500 text-white ml-auto">Next &gt;</button>
-                <button type="submit" class="px-4 py-2 rounded bg-blue-500 text-white float-left">Submit</button>
+                <button type="button" class="previous px-4 py-2 rounded bg-blue-900 text-white float-right">&lt; Previous</button>
+                <button type="button" class="next px-4 py-2 rounded bg-blue-900 text-white ml-auto">Next &gt;</button>
+                <button type="submit" class="px-4 py-2 rounded bg-blue-900 text-white float-left">Submit</button>
             </div>
 
           </form>

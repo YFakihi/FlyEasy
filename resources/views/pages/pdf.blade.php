@@ -9,19 +9,7 @@
 <body>
     <table class="w-full">
         <tr>
-            <td class="w-1/2">
-                <img src="{{ asset('laraveldaily.png') }}" alt="laravel daily" width="200" />
-            </td>
-            <td class="w-1/2">
-                <h2>Invoice ID: 834847473</h2>
-            </td>
-        </tr>
-    </table>
- 
-    <div class="margin-top">
-        <table class="w-full">
-            <tr>
-                <td class="w-1/2">
+            <td class="w-1/2"> 
                     <div><h4>To: </h4></div>
                     <div>{{ auth()->user()->name }}</div>
                     <div>123 Acme Str.</div>

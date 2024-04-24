@@ -38,9 +38,7 @@ Route::get('about', function () {
     return view('pages/about');
 })->name('about');
 
-Route::get('home', function () {
-    return view('dashboard/home');
-})->name('home');
+
 
 Route::get('booking', function () {
     return view('pages/booking');
@@ -48,15 +46,22 @@ Route::get('booking', function () {
 
 
 
-//airport
+
+
+// Route::get('/', [AirportController::class, 'airportlist'])->name('welcom');
+
+
+Route::group(['middleware' => 'role:admin'], function() {
+    Route::get('home', function () {
+        return view('dashboard/home');
+    })->name('home');
+
+  //airport  
 Route::get('/airports', [AirportController::class,'index'])->name('airports')->middleware('auth');
 Route::post('/airports', [AirportController::class,'store'])->name('add_airports')->middleware('auth');
 Route::delete('/delete/{id}', [AirportController::class,'delete'])->name('airports.delete')->middleware('auth');
 Route::put('/airports/{id}', [AirportController::class, 'update'])->name('airports.update')->middleware('auth');
 Route::get('/get-services/{id}', [AirportController::class, 'getServices'])->middleware('auth');
-// Route::get('/', [AirportController::class, 'airportlist'])->name('welcom');
-
-
 
 //services
 Route::get('/service', [ServiceController::class,'index'])->name('showservices')->middleware('auth');
@@ -64,12 +69,19 @@ Route::post('/services', [ServiceController::class,'store'])->name('add_services
 Route::delete('/remove/{id}',[ServiceController::class, 'destroy'])->name('services.delete')->middleware('auth');
 Route::put('/update/{id}', [ServiceController::class,'update'])->name('service.update')->middleware('auth');
 
+
+//booking
+Route::get('/overview',[BookingController::class,'overview'])->name('overview')->middleware('auth');
+ });
+
+
+
 //booking
 
 Route::get('/booking',[BookingController::class,'index'])->name('booking')->middleware('auth');
 Route::post('/booking/reserve', [BookingController::class, 'create'])->name('booking/create')->middleware('auth');
 Route::get('/reservation',[BookingController::class,'displaybooking'])->name('listbooking');
-Route::get('/overview',[BookingController::class,'overview'])->name('overview')->middleware('auth');
+
 
 //cart
 Route::get('add/to/cart/',[CartController::class,'index'])->name('cart');

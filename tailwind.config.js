@@ -16,4 +16,14 @@ export default {
   plugins: [
     require('flowbite/plugin')
   ],
+
+  // tailwind.config.js
+// module.exports = {
+//   darkMode: 'class',
+//   // ...
+// }
+// module.exports = {
+//   darkMode: 'media',
+//   // ...
+// }
 }

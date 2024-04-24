@@ -71,7 +71,7 @@ Route::put('/update/{id}', [ServiceController::class,'update'])->name('service.u
 
 
 //booking
-Route::get('/overview',[BookingController::class,'overview'])->name('overview')->middleware('auth');
+Route::get('/statistic', [BookingController::class, 'statistic'])->name('overview')->middleware('auth');
  });
 
 

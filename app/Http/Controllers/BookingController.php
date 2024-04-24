@@ -8,6 +8,7 @@ use App\Models\Payment;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
@@ -72,6 +73,27 @@ public function overview(){
     $booking = booking::all();
     $services = Service::all();
     return view('dashboard.overview',compact('airports'));
+}
+
+
+public function statistic(){
+    $totalRevenue = DB::table('booking as b')
+        ->join('payments as p', 'b.id', '=', 'p.booking_id')
+        ->sum('p.amount');
+
+        $users = DB::table('users')->count('id');
+
+
+        $admin = DB::table('users')->where('role' , '=' , 'admin')->count('id');
+
+        $airports = db::table('airports')->count('id');
+
+        $services = db::table('services')->count('id');
+        $booking = db::table('booking')->count('id');
+
+
+    return view('dashboard.overview', compact('totalRevenue','users','admin'
+,'airports','services','booking'));
 }
     /**
      * Store a newly created resource in storage.

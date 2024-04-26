@@ -244,16 +244,16 @@
               aria-labelledby="dropdown">
               <li>
                 <a
-                  href="#"
+                  href="{{route('profile')}}"
                   class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
                   >My profile</a
                 >
               </li>
               <li>
                 <a
-                  href="#"
+                  href="{{route('welcome')}}"
                   class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
-                  >Account settings</a>
+                  >Home</a>
               </li>
             </ul>
 
@@ -261,11 +261,10 @@
               class="py-1 text-gray-700 dark:text-gray-300"
               aria-labelledby="dropdown">
               <li>
-                <a
-                  href="#"
-                  class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >Sign out</a
-                >
+                <a class="text-gray-500   font-medium rounded-lg text-sm px-4 py-2 text-center " onclick="event.preventDefault(); document.getElementById('logoutform').submit();" href="{{route('logout')}}">Logout</a>
+                <form id="logoutform" action="{{route('logout')}}" method="post" style="display: none;">
+                    @csrf
+                </form>
               </li>
             </ul>
           </div>

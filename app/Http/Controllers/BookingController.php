@@ -44,7 +44,7 @@ class BookingController extends Controller
 
     $validatedData = $request->validate([
         'airport_id' => 'required|exists:airports,id',
-        'date' => 'required|date',
+        'date' => 'required|date|after_or_equal:today',
         'time' => 'required',
         'service_type' => 'required|in:arrival_fast_track,departure_fast_track',
         'number_of_adults' => 'required|integer|min:1',
@@ -64,7 +64,7 @@ class BookingController extends Controller
     $booking = Booking::create($validatedData);
 
     // Redirect or respond as needed
-    return redirect()->back()->with('success', 'Booking created successfully.');
+    return redirect()->route('welcome')->with('success', 'Booking created successfully.');
 }
 
 

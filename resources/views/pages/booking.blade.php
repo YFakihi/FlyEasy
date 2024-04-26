@@ -29,7 +29,7 @@
           <div class="card px-20 py-12 mt-12 shadow">
 
             <div class="flex justify-between my-3">
-                <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step0">Services</label>
+                <label class="cursor-pointer  px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step0">Services</label>
                 <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step1">Flight info</label>
                 <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step2">Details </label>
                 {{-- <label class="cursor-pointer px-3 py-2 rounded shadow-sm bg-white border border-gray-300 ml-2 step3">Check Out</label> --}}
@@ -38,12 +38,9 @@
 
 
         
-              <form action="{{ route('booking/create') }}" method="post" class="employee-form">
+              <form action="{{ route('booking/create') }}"  method="post"  class="employee-form" onsubmit="return validateData();">
                @csrf
-
               <div class="form-section">
-
-               
                 <div class="w-full mb-4">
                     <label class="block text-gray-600 font-semibold mb-2">Airport Services</label>
                     <div>
@@ -89,8 +86,12 @@
 
                 <div class="w-full mb-4">
                     <label for="date" class="block text-gray-600 font-semibold mb-2">Date</label>
-                    <input type="date" id="date" name="date" class="w-full px-4 py-2 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"required>
+                    <input type="date" id="date" name="date" class="w-full px-4 py-2 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" required>
+                    @error('date')
+                    <span class="text-red-500">{{ $message }}</span>
+                    @enderror
                 </div>
+                
                 <div class="w-full mb-4">
                     <label for="time" class="block text-gray-600 font-semibold mb-2">Time</label>
                     <input type="time" id="time" name="time" class="w-full px-4 py-2 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" required>
@@ -118,31 +119,6 @@
                     <input type="text" id="lname" name="last_name" class="w-full px-4 py-2 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" required placeholder="Last Name">
                 </div> 
               </div>
-{{-- 
-              <div class="form-section">
-                <div id="input-container" class="mt-4">
-                    <form action="{{ route('session') }}" method="POST" id="checkout-form">
-                        @csrf
-                        <!-- Add other form fields if needed -->
-                        <h3 class="text-xl font-extrabold text-[#333] border-b pb-4">Order Summary</h3>
-                        @if(isset($booking))
-                            <input type="hidden" name="productname" value="Asus Vivobook 17 Laptop - Intel Core 10th">
-                            <input type="hidden" name="totalPrice" value="{{ $booking->totalPrice }}">
-                            <input type="hidden" name="bookingId" value="{{ $booking->id }}">
-                            <!-- Display total price -->
-                            <ul id="orderItems" class="text-[#333] divide-y mt-6">
-                                <li class="flex flex-wrap gap-4 text-md py-4 font-bold">Total <span id="totalPrice" class="ml-auto">${{ $booking->totalPrice }}</span></li>
-                            </ul>        
-                            <!-- Add a submit button -->
-                            <button type="submit" class="mt-6 text-md px-6 py-2.5 w-full bg-blue-600 hover:bg-blue-700 text-white rounded">Check out</button>
-                        @endif
-                    </form>
-                </div>
-            </div> --}}
-            
-            
-            
-            
 
               <div class="form-navigation flex justify-between mt-3">
                 <button type="button" class="previous px-4 py-2 rounded bg-blue-900 text-white float-right">&lt; Previous</button>
@@ -161,6 +137,34 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
+
+
+  <script>
+    function validateData() {
+        var date = document.getElementById('date').value;
+        var currentDate = new Date().toISOString().slice(0, 10); // Get today's date in the format 'YYYY-MM-DD'
+
+        if (date < currentDate) {
+            alert('Please select a date that is today or in the future.');
+            return false;
+        }
+
+        return true;
+    }
+
+    // Assuming you have a 'Submit' button with the class 'submit-button'
+    document.querySelector('.submit-button').addEventListener('click', function() {
+        if (!validateData()) {
+            return false;
+        }
+
+        // Additional logic for submitting the form can be added here
+    });
+</script>
+
+
+
+
   <script>
      $(function(){
         var $sections=$('.form-section');
@@ -207,6 +211,9 @@
         navigateTo(0);
     });
 
+
+
+   
 
 
 // the script is an AJAX request that is triggered when the selected value of the '#airport' dropdown changes.

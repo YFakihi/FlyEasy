@@ -19,29 +19,22 @@
             <tbody>
                 @foreach ($booking as $reservation)
                 <tr class="border-b dark:border-gray-700">
-                    <td class="px-4 py-3">{{$reservation->user->name}}</td>
+                    <td class="px-4 py-3">{{($reservation->first_name) ." ". ($reservation->last_name)}}</td>
                     <td class="px-4 py-3">{{$reservation->airport->name}}</td>
                     <td class="px-4 py-3">{{$reservation->date}}</td>
                     <td class="px-4 py-3">{{$reservation->time}}</td> 
-                    <td class="px-4 py-3">{{ optional($reservation->payment)->payment_status }}</td>                    <td class="px-4 py-3">{{$reservation->service_type}}</td>
+                    <td class="px-4 py-3">{{$reservation->payment_status }}</td>              
+                  <td class="px-4 py-3">{{$reservation->service_type}}</td>
                     <td class="px-4 py-3">{{$reservation->number_of_adults}}</td>
                     <td class="px-4 py-3">{{$reservation->number_of_children}}</td>
                 </tr>  
                 @endforeach
+                {{-- {{ $bookings->links() }}  --}}
             </tbody>
         </table>
     </div>
-    <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
-        <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-            Showing
-            <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
-            of
-            <span class="font-semibold text-gray-900 dark:text-white">1000</span>
-        </span>
-        <ul class="inline-flex items-stretch -space-x-px">
-            <!-- Pagination links -->
-        </ul>
-    </nav>
+
+
 </section>    
 
 @endsection

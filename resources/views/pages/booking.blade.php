@@ -140,26 +140,7 @@
 
 
   <script>
-    function validateData() {
-        var date = document.getElementById('date').value;
-        var currentDate = new Date().toISOString().slice(0, 10); // Get today's date in the format 'YYYY-MM-DD'
-
-        if (date < currentDate) {
-            alert('Please select a date that is today or in the future.');
-            return false;
-        }
-
-        return true;
-    }
-
-    // Assuming you have a 'Submit' button with the class 'submit-button'
-    document.querySelector('.submit-button').addEventListener('click', function() {
-        if (!validateData()) {
-            return false;
-        }
-
-        // Additional logic for submitting the form can be added here
-    });
+   
 </script>
 
 
@@ -175,6 +156,10 @@
 
             $('.form-navigation .previous').toggle(index>0);
             var atTheEnd = index >= $sections.length - 1;
+            console.log(index);
+            if(index == 2){
+                validateData()
+            }
             $('.form-navigation .next').toggle(!atTheEnd);
             $('.form-navigation [Type=submit]').toggle(atTheEnd);
 
@@ -212,6 +197,34 @@
     });
 
 
+
+
+//validate date
+    function validateData() {
+        var date = document.getElementById('date').value;
+        var currentDate = new Date().toISOString().slice(0, 10); // Get today's date in the format 'YYYY-MM-DD'
+        console.log(currentDate, date);
+        if (date < currentDate) {
+            alert('Please select a date that is today or in the future.');
+            return false;
+        }
+
+        return true;
+    }
+
+    // Assuming you have a 'Submit' button with the class 'submit-button'
+    document.querySelector('.submit-button').addEventListener('click', function() {
+        if (!validateData()) {
+            return false;
+        }
+
+        // Additional logic for submitting the form can be added here
+    });
+
+
+
+
+    
 
    
 

@@ -3,16 +3,24 @@
 namespace App\Providers;
 
 use App\Models\Permission;
+use App\Repositories\AirportRepositoryInterface;
+use App\Repositories\UserRepository;
+use App\Repositories\AirportRepository;
+use App\Repositories\BookingRepository;
+use App\Repositories\BookingRepositoryInterface;
+use App\Repositories\UserRepositoryInterface;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
-{
-    public function register(): void
+{ 
+    public function register(): void 
     {
-
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(AirportRepositoryInterface::class, AirportRepository::class);
+        $this->app->bind(BookingRepositoryInterface::class, BookingRepository::class);
     }
 
     public function boot(): void

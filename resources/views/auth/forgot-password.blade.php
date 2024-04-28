@@ -27,7 +27,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-28">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">

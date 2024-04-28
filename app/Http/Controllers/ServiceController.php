@@ -60,7 +60,7 @@ class ServiceController extends Controller
 
     public function destroy($id){
         $service = Service::findOrFail($id);
-
+       
         $service->delete();
         session()->flash('success', "{$service->name} deleted successfully");
         return response()->json(['success' => true, 'message' => "{$service->name} deleted successfully"]);

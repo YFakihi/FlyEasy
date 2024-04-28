@@ -4,13 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Airport;
 use Illuminate\Http\Request;
-
+use App\Repositories\AirportRepositoryInterface;
 class AirportController extends Controller
 {
+
+    protected $repository;
+
+    public function __construct(AirportRepositoryInterface $repository) {
+        $this->repository = $repository; 
+    }
+    
     public function index(){
-        $airports = Airport::all();
+        $airports = $this->repository->getAll();
         return view('dashboard.airports',compact('airports'));
     }
+    
 
     public function store (Request $request){
         $validatedata = $request->validate([
@@ -27,40 +35,45 @@ class AirportController extends Controller
             $file->move($path, $fileName);
             $all["images"] = $fileName;
         }
-        Airport::create($all);
+        // Airport::create($all);
+
+        $this->repository->create($all);
        return redirect()->back()->with('success','airport bien ajouter!!');
     }
     public function airportlist()
     {
-        $airports = Airport::all();
+        $airports = $this->repository->getAll();
         return view('welcome', compact('airports'));
     }
 
     public function getServices($id)
     {
-        $airport = Airport::with('services')->find($id);
+        // $airport = Airport::with('services')->find($id);
+        $airport = $this->repository->getById($id);
         return response()->json($airport->services);
     }
     public function delete($id)
     {
-        $airport = Airport::findOrFail($id);
-        $airport->delete();
+       
+        $airport = $this->repository->getById($id);
+        $this->repository->delete($airport);
+        // $airport = Airport::findOrFail($id);
+        // $airport->delete();
     
         session()->flash('success', "{$airport->name} deleted successfully");
         return response()->json(['success' => true, 'message' => "airport deleted successfully"]);  
     }
 
-    public function update(Request $request ,$id){
-        $validatedata = $request->validate([
-            'name'=> 'required|string|max:234'
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:234'
         ]);
-    
-         $airport = Airport::find($id);
-         $airport->update([
-            'name'=> $request->input('name')
-         ]);
-         return redirect()->back()->with('success','airport bien modifier!!');
+
+        $airport = $this->repository->getById($id);
+        $this->repository->update($airport, $request->only('name'));
+
+        return redirect()->back()->with('success', 'Airport updated successfully');
     }
-    
     
 }

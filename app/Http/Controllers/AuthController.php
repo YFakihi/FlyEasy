@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use App\Repositories\UserRepository;
+use App\Repositories\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
 
@@ -19,7 +20,7 @@ class AuthController extends Controller
 {
     protected $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
     }
@@ -65,7 +66,7 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect('/');
     }
-
+ 
     public function showForgotPasswordForm()
     {
         return view('auth.forgot-password');

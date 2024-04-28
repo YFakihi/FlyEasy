@@ -36,34 +36,32 @@ class BookingController extends Controller
      * Show the form for creating a new resource.
      */
 
-     public function create(Request $request)
+public function create(Request $request){
+        $validatedData = $request->validate([
+            'airport_id' => 'required|exists:airports,id',
+            'date' => 'required|date|after_or_equal:today',
+            'time' => 'required',
+            'service_type' => 'required|in:arrival_fast_track,departure_fast_track',
+            'number_of_adults' => 'required|integer|min:1',
+            'number_of_children' => 'required|integer|min:0',
+            'service_id' => 'required|exists:services,id',     
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+        ]);
+        
+    // Add the authenticated user's ID to the request data
+    $validatedData['user_id'] = auth()->id();
+    
+    // Set a default value for payment_status
+    $validatedData['payment_status'] = 'pending';
+    
+  
+    // $booking = Booking::create($validatedData);
+    $this->bookingRepository->create($validatedData);
 
-     {
-     
-         $validatedData = $request->validate([
-             'airport_id' => 'required|exists:airports,id',
-             'date' => 'required|date|after_or_equal:today',
-             'time' => 'required',
-             'service_type' => 'required|in:arrival_fast_track,departure_fast_track',
-             'number_of_adults' => 'required|integer|min:1',
-             'number_of_children' => 'required|integer|min:0',
-             'service_id' => 'required|exists:services,id',     
-             'first_name' => 'required|string|max:255',
-             'last_name' => 'required|string|max:255',
-         ]);
-         
-         // Add the authenticated user's ID to the request data
-         $validatedData['user_id'] = auth()->id();
-         
-         // Set a default value for payment_status
-         $validatedData['payment_status'] = 'pending';
-         
-         // Then you can create the booking
-         $booking = Booking::create($validatedData);
-     
-         // Redirect or respond as needed
-         return redirect()->route('welcome')->with('success', 'Booking created successfully.');
-     }
+ 
+    return redirect()->route('welcome')->with('success', 'Booking created successfully.');
+}
 
 public function statistic(BookingRepositoryInterface $bookingRepository){
     $totalRevenue = $bookingRepository->getTotalRevenue();
@@ -93,6 +91,8 @@ public function overview(){
     $airports = $this->bookingRepository->all();
     $booking = $this->bookingRepository->all();
     $services = $this->bookingRepository->all();
+
+    
     return view('dashboard.overview',compact('airports'));
 }
 

@@ -29,11 +29,12 @@
                     <td class="px-4 py-3">{{$reservation->number_of_children}}</td>
                 </tr>  
                 @endforeach
-                {{-- {{ $bookings->links() }}  --}}
+              
             </tbody>
         </table>
+        
     </div>
-
+  
 
 </section>    
 

@@ -16,7 +16,7 @@ class ProfiletController extends Controller
     {
         $user = auth()->user();
         
-        // Get all bookings that have been paid for the current user
+       
         $bookings = Booking::where('user_id', $user->id)
                             ->where('payment_status', 'paid')
                             ->get();

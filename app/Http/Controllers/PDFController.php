@@ -20,10 +20,10 @@ class PDFController extends Controller
 
 
      public function download($id) {
-        // Get the booking based on the provided ID
+    
         $booking = Booking::findOrFail($id);
         
-        // Sample data for the PDF
+
         $airport = Airport::all();
         $service = Service::all();
     

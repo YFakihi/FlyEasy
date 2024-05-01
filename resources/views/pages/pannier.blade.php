@@ -92,7 +92,7 @@
                         </div>
 
                         <form action="{{ route('session') }}" method="POST" id="checkout-form">
-                            <input type="hidden" name="productname" value="Asus Vivobook 17 Laptop - Intel Core 10th">
+                            <input type="hidden" name="bookingMessages" value="welcome To Our services">
                             <input type="hidden" name="totalPrice" value="{{ $reservation->totalPrice }}">
                             <input type="hidden" name="bookingId" value="{{ $reservation->id }}">
                             @csrf

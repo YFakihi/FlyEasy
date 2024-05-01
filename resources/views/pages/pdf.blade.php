@@ -46,14 +46,14 @@
                     {{ $booking['time'] }}
                 </td>
                 <td class="w-1/4">
-                    {{ $booking['totalPrice'] }}
+                    $1200{{ $booking['totalPrice'] }}
                 </td>
             </tr>
         </table>
     </div>
  
     <div class="total">
-        Total: ${{ $booking['totalPrice'] }} USD
+        Total: $1200{{ $booking['totalPrice'] }}
     </div>
  
     <div class="footer margin-top">

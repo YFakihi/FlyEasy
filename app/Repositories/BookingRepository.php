@@ -60,7 +60,10 @@ class BookingRepository implements BookingRepositoryInterface
     {
         return Airport::count();
     }
-
+    public function paginate($perPage)
+    {
+        return Booking::paginate($perPage);
+    }
     public function getServiceCount()
     {
         return Service::count();

@@ -20,6 +20,7 @@ interface BookingRepositoryInterface
     public function getAirportCount();
     public function getServiceCount();
     public function getBookingCount();
+    public function paginate($perPage);
  
 
 }

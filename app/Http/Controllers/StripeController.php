@@ -26,11 +26,9 @@ class StripeController extends Controller
 
     public function session(Request $request)
     {
-        // Set your Stripe API key
         Stripe::setApiKey(config('services.stripe.secret'));
         
-        // Retrieve product name, total price, and booking ID from the request
-        $productName = $request->input('productname');
+        $productName = $request->input('bookingMessages');
         $totalPrice = $request->input('totalPrice');
         $bookingId = $request->input('bookingId');
         

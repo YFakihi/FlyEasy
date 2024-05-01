@@ -5,10 +5,16 @@
 @extends('layouts.app')
 @section('content')
 
-<section class="bg-gray-50 dark:bg-gray-900 mt-12">
+<section class="bg-[#5bb4b8] mt-12">
+	      <div
+                    class="flex w-full max-w-[440px] items-center gap-2 lg:absolute lg:end-6 lg:top-6 lg:max-w-full">
+                    <a href="/" class="block w-8 lg:hidden">
+                        <img src="{{asset('images/reserv.jpeg')}}" alt="Cover Image" class="w-full" />
+                    </a>
+                </div>
 	<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
 
-		<div class="w-full bg-blue-900 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+		<div class="w-full bg-[#6fbbc1] rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
 			<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 				<h1 class="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl dark:text-white">
 					Sign in to your account

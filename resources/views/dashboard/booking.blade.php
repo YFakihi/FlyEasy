@@ -34,7 +34,10 @@
         </table>
         
     </div>
-  
+
+
+
+        {{ $booking->links() }}
 
 </section>    
 

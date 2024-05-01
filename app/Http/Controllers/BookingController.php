@@ -11,6 +11,7 @@ use App\Repositories\BookingRepository;
 use App\Repositories\BookingRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\PaginatesModels;
 
 class BookingController extends Controller
 {
@@ -49,14 +50,12 @@ public function create(Request $request){
             'last_name' => 'required|string|max:255',
         ]);
         
-    // Add the authenticated user's ID to the request data
+   
     $validatedData['user_id'] = auth()->id();
     
-    // Set a default value for payment_status
+   
     $validatedData['payment_status'] = 'pending';
     
-  
-    // $booking = Booking::create($validatedData);
     $this->bookingRepository->create($validatedData);
 
  
@@ -78,7 +77,7 @@ public function statistic(BookingRepositoryInterface $bookingRepository){
 
 public function displaybooking()
 {
-    $booking = $this->bookingRepository->all();
+    $booking = booking::paginate(4);
     $user = $this->bookingRepository->all();
     $payments = $this->bookingRepository->all();
     $airports = $this->bookingRepository->all();
@@ -87,16 +86,14 @@ public function displaybooking()
 }
 
 
+
 public function overview(){
     $airports = $this->bookingRepository->all();
-    $booking = $this->bookingRepository->all();
+    $booking = $this->bookingRepository->all(); 
     $services = $this->bookingRepository->all();
 
-    
-    return view('dashboard.overview',compact('airports'));
+    return view('dashboard.overview', compact('airports', 'booking', 'services'));
 }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -105,6 +102,9 @@ public function overview(){
     {
         //
     }
+
+
+
 
     /**
      * Display the specified resource.

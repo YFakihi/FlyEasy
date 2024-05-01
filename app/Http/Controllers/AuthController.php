@@ -55,6 +55,8 @@ class AuthController extends Controller
         $form['password'] = Hash::make($form['password']);
         $user = $this->userRepository->create($form);
 
+        
+
         Auth::login($user);
         return redirect('/');
     }

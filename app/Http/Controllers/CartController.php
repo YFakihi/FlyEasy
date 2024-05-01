@@ -37,58 +37,60 @@ class CartController extends Controller
 
 
 
-    public function showCart()
-    {
-        $cartItems = Cart::where('user_id', auth()->id())->get();
+   
     
-        
 
-        
-        $totalPrice = $cartItems->sum(function ($item) {
-            return $item->product->price * $item->quantity; // Calculate the total price
-        });
-        
-        $booking_id = null;
-        $booking = null;
-        
-        if ($cartItems->isNotEmpty()) {
-            $firstCartItem = $cartItems->first();
-            $booking_id = $firstCartItem->booking_id;
-            $booking = Booking::find($booking_id);
-        }
-        
-        
-        if (!$booking) {
-            $booking = new Booking();
-            $booking->save();
-            $booking_id = $booking->id;
-        }
-    
-        if ($totalPrice !== null) {
-            $booking->amount = $totalPrice;
-            $booking->save();
-        }
-        
-        return view('pannier', compact('totalPrice', 'booking_id')); // Pass the total price and booking ID to the view
-    }
-    
-    
-    
+
 
 
     public function remove($id)
     {
-        // Find the booking in the user's bookings
+    
         $booking = auth()->user()->booking()->findOrFail($id);
-        
-        // Delete the booking from the database
+      
         $booking->delete();
         
-        // Optionally, update any relevant totals or quantities
-        
-        // Redirect back or return a response indicating success
+      
         return redirect()->back()->with('success', 'Booking removed successfully');
     }
+    
+
+
+     // public function showCart()
+    // {
+    //     $cartItems = Cart::where('user_id', auth()->id())->get();
+    
+        
+
+        
+    //     $totalPrice = $cartItems->sum(function ($item) {
+    //         return $item->product->price * $item->quantity; 
+    //     });
+        
+    //     $booking_id = null;
+    //     $booking = null;
+        
+    //     if ($cartItems->isNotEmpty()) {
+    //         $firstCartItem = $cartItems->first();
+    //         $booking_id = $firstCartItem->booking_id;
+    //         $booking = Booking::find($booking_id);
+    //     }
+        
+        
+    //     if (!$booking) {
+    //         $booking = new Booking();
+    //         $booking->save();
+    //         $booking_id = $booking->id;
+    //     }
+    
+    //     if ($totalPrice !== null) {
+    //         $booking->amount = $totalPrice;
+    //         $booking->save();
+    //     }
+        
+    //     return view('pannier', compact('totalPrice', 'booking_id')); // Pass the total price and booking ID to the view
+    // }
+    
     
 
     /**

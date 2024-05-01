@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class ServiceController extends Controller
 {
     public function index(){
-        $servises = Service::all();
+       $servises = Service::with('airports')->get();
+
        
         $airports = Airport::all();
         return view('dashboard.services', compact('servises','airports'));
